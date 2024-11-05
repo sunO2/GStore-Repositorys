@@ -24,6 +24,12 @@ apps:
     appId: dev.jdtech.jellyfin
     icon: https://ghp.ci/https://github.com/jarnedemeulemeester/findroid/blob/main/core/src/main/ic_launcher-playstore.png
     des: Jellyfin 第三方客户端
+  - name: jellyfin
+    user: jellyfin
+    repositories: jellyfin-android
+    appId: org.jellyfin.mobile
+    icon: https://ghp.ci/https://github.com/jellyfin/jellyfin-android/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+    des: Jellyfin 官方客户端
   - name: Bitwarden
     user: bitwarden
     repositories: android
