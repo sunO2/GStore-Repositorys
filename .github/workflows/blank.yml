@@ -8,7 +8,7 @@ jobs: # 执行的工作
     runs-on: ubuntu-latest # 在最新版本的 Ubuntu 操作系统环境下运行
     steps: # 要执行的步骤
       - name: Checkout code
-        uses: actions/checkout@v3  # 用于将github代码仓库的代码拷贝到工作目录中A
+        uses: actions/checkout@v3  # 用于将github代码仓库的代码拷贝到工作目录中
  
       - name: Set up Python
         uses: actions/setup-python@v2 # 用于设置 Python 环境，它允许你指定要在工作环境中使用的 Python 版本
