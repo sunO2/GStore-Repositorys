@@ -21,11 +21,11 @@ jobs: # 执行的工作
  
       - name: Run main.py
         run: python db.py # 执行py文件    依据自己代码要运行的py情况而定
-      - name: read-yaml-file
-        uses: pietrobolcato/action-read-yaml@1.0.0
-        id: read_action_js
-        with:
-          config: apps.yaml
-      - name: use-yaml-file
+      - name: Read version from YAML
         run: |
-          echo namespace: ${{ steps.read_action_js.outputs['version'] }}
+          import yaml
+          with open('config.yaml', 'r') as file:
+          data = yaml.safe_load(file)
+          version = data.get('version', 'Not Found')
+          print(f"Version: {version}")
+          echo "::set-output name=version::$version"
