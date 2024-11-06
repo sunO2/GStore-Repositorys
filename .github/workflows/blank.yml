@@ -25,7 +25,7 @@ jobs: # 执行的工作
         run: |
           import yaml
           with open('apps.yaml', 'r') as file:
-          data = yaml.safe_load(file)
-          version = data.get('version', 'Not Found')
+            data = yaml.safe_load(file)
+            version = data.get('version', 'Not Found')
           print(f"Version: {version}")
           echo "::set-output name=version::$version"
