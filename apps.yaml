@@ -108,9 +108,9 @@ apps:
     appId: com.network.proxy
     icon: https://ghp.ci/https://github.com/wanghongenpin/proxypin/blob/main/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
     des: 多平台网络抓包工具
-  - name: RustDesk
-    user: rustdesk
-    repositories: rustdesk
-    appId: com.carriez.flutter_hbb
-    icon: https://ghp.ci/https://github.com/rustdesk/rustdesk/blob/master/flutter/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
-    des: 多平台远程桌面控制软件工具
+  # - name: RustDesk
+  #   user: rustdesk
+  #   repositories: rustdesk
+  #   appId: com.carriez.flutter_hbb
+  #   icon: https://ghp.ci/https://github.com/rustdesk/rustdesk/blob/master/flutter/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+  #   des: 多平台远程桌面控制软件工具
