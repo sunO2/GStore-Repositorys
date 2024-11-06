@@ -29,3 +29,23 @@ jobs: # 执行的工作
       - name: use-yaml-file
         run: |
           echo namespace: ${{ steps.read_action_js.outputs['version'] }}
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.read_action_js.outputs['version'] }}
+          release_name: Release ${{ steps.read_action_js.outputs['version'] }}
+          body: 更新app V${{ steps.read_action_js.outputs['version'] }}.
+          draft: false
+          prerelease: false
+        
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./config.db
+          asset_name: apps.db
