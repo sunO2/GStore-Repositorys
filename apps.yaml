@@ -1,10 +1,10 @@
-version: 0.0.2
+version: 0.0.3
 apps:
   - name: LibChecker
     user: LibChecker
     repositories: LibChecker
     icon: https://ghp.ci/https://raw.githubusercontent.com/LibChecker/LibChecker/refs/heads/master/app/src/main/res/drawable-xxxhdpi/pic_logo.png
-    des: 应用信息检查
+    des: 应用信息检查 通过快照 对比应用更新内容
     appId: com.absinthe.libchecker
     category: 
       - APPINFO
