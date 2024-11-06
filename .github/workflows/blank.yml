@@ -24,7 +24,7 @@ jobs: # 执行的工作
       - name: Read version from YAML
         run: |
           import yaml
-          with open('config.yaml', 'r') as file:
+          with open('apps.yaml', 'r') as file:
             data = yaml.safe_load(file)
             version = data.get('version', 'Not Found')
           print(f"Version: {version}")
