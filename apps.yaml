@@ -1,4 +1,4 @@
-version: 0.0.5
+version: 0.0.6
 apps:
   - name: LibChecker
     user: LibChecker
@@ -114,3 +114,9 @@ apps:
     appId: com.carriez.flutter_hbb
     icon: https://ghp.ci/https://github.com/rustdesk/rustdesk/blob/master/flutter/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
     des: 多平台远程桌面控制软件工具
+  - name: GopeedLab
+    user: GopeedLab
+    repositories: gopeed
+    appId: com.gopeed
+    icon: https://ghp.ci/https://github.com/GopeedLab/gopeed/blob/main/ui/flutter/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+    des: 多平台下载器 下载速度飞快
