@@ -23,12 +23,11 @@ jobs: # 执行的工作
         run: python db.py # 执行py文件    依据自己代码要运行的py情况而定
       - name: Read version from YAML
         run: |
-          import yaml
-
-          # Open the YAML file and load its content
-          with open('config.yaml', 'r') as file:
-              data = yaml.safe_load(file)
-              version = data.get('version', 'Not Found')
-
-          # Output the version to GitHub Actions log
-          print(f"Version: {version}")
+          python -c "
+            import yaml
+            with open('config.yaml', 'r') as file:
+               data = yaml.safe_load(file)
+               version = data.get('version', 'Not Found')
+            print(f'Version: {version}')
+            import os
+            os.environ['VERSION'] = version"
