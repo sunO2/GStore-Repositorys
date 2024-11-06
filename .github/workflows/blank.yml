@@ -25,7 +25,7 @@ jobs: # 执行的工作
         uses: pietrobolcato/action-read-yaml@1.0.0
         id: read_action_js
         with:
-          config: ${{ github.workspace }}/apps.yaml
+          config: apps.yaml
       - name: use-yaml-file
         run: |
           echo namespace: ${{ steps.read_action_js.outputs['version'] }}
