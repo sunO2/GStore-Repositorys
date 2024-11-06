@@ -49,3 +49,4 @@ jobs: # 执行的工作
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./config.db
           asset_name: apps.db
+          asset_content_type: application/zip
