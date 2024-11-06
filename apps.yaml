@@ -1,4 +1,4 @@
-version: 0.0.1
+version: 0.0.2
 apps:
   - name: LibChecker
     user: LibChecker
@@ -6,36 +6,54 @@ apps:
     icon: https://ghp.ci/https://raw.githubusercontent.com/LibChecker/LibChecker/refs/heads/master/app/src/main/res/drawable-xxxhdpi/pic_logo.png
     des: 应用信息检查
     appId: com.absinthe.libchecker
+    category: 
+      - APPINFO
+      - TOOLS
   - name: LocalSend
     user: localsend
     repositories: localsend
     appId: org.localsend.localsend_app
     icon: https://ghp.ci/https://github.com/localsend/localsend/blob/main/app/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true
     des: 本地文件传输
+    category: 
+      - TOOLS
+      - NET
   - name: keyguard
     user: AChep
     repositories: keyguard-app
     appId: com.artemchep.keyguard
     icon: https://ghp.ci/https://github.com/AChep/keyguard-app/blob/master/common/src/androidMain/res/mipmap-xxxhdpi/ic_launcher.png?raw=true
     des: Bitwarden 第三方客户端
+    category:
+      - PASSWORD
+      - TOOLS
   - name: findroid
     user: jarnedemeulemeester
     repositories: findroid
     appId: dev.jdtech.jellyfin
     icon: https://ghp.ci/https://github.com/jarnedemeulemeester/findroid/blob/main/core/src/main/ic_launcher-playstore.png
     des: Jellyfin 第三方客户端
+    category: 
+      - VIDEO
+      - MOVIE
   - name: jellyfin
     user: jellyfin
     repositories: jellyfin-android
     appId: org.jellyfin.mobile
     icon: https://ghp.ci/https://github.com/jellyfin/jellyfin-android/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
     des: Jellyfin 官方客户端
+    category: 
+      - VIDEO
+      - MOVIE
   - name: Bitwarden
     user: bitwarden
     repositories: android
     appId: com.x8bit.bitwarden
     icon: https://store-images.s-microsoft.com/image/apps.9628.15bced16-76b6-40f0-b229-b0fa0f565ba8.a4bafbe6-7354-4f8f-b022-5bd405f680f1.a63587e6-b50f-4673-8e37-16cc614b7873
     des: Bitwarden 官方客户端
+    category:
+      - PASSWORD
+      - TOOLS
   - name: LX Music
     user: lyswhut
     repositories: lx-music-mobile
