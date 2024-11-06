@@ -36,7 +36,7 @@ jobs: # 执行的工作
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ steps.read_action_js.outputs['version'] }}
-          release_name: Release ${{ steps.read_action_js.outputs['version'] }}
+          release_name: ${{ steps.read_action_js.outputs['version'] }}
           body: 更新app V${{ steps.read_action_js.outputs['version'] }}.
           draft: false
           prerelease: false
