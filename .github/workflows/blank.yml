@@ -26,3 +26,6 @@ jobs: # 执行的工作
         id: read_action_js
         with:
           config: ${{ github.workspace }}/apps.yaml
+      - name: use-yaml-file
+        run: |
+          echo namespace: ${{ steps.read_action_js.outputs['version'] }}
