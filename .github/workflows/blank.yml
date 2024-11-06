@@ -24,8 +24,11 @@ jobs: # 执行的工作
       - name: Read version from YAML
         run: |
           import yaml
-          with open('apps.yaml', 'r') as file:
-            data = yaml.safe_load(file)
-            version = data.get('version', 'Not Found')
+
+          # Open the YAML file and load its content
+          with open('config.yaml', 'r') as file:
+              data = yaml.safe_load(file)
+              version = data.get('version', 'Not Found')
+
+          # Output the version to GitHub Actions log
           print(f"Version: {version}")
-          echo "::set-output name=version::$version"
