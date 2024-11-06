@@ -21,13 +21,11 @@ jobs: # 执行的工作
  
       - name: Run main.py
         run: python db.py # 执行py文件    依据自己代码要运行的py情况而定
-      - name: Read version from YAML
-        run: |
-          python -c "
-            import yaml
-            with open('config.yaml', 'r') as file:
-               data = yaml.safe_load(file)
-               version = data.get('version', 'Not Found')
-            print(f'Version: {version}')
-            import os
-            os.environ['VERSION'] = version"
+      - name: read-yaml-file-1
+        uses: ehsandanesh/action-read-yaml@env-var-and-filter
+        id: deployments
+        with:
+          config: ${{ github.workspace }}/apps.yaml
+          # This key is optional, omitting that will cause the action to skip environment variables output generation
+          # This RegEx is the pattern that will filter out the dot notation keys and also the pattern itself will be removed from the key name
+          key-path-pattern: ^deployment\.code\.
