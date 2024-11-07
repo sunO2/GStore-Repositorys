@@ -24,7 +24,8 @@ CREATE TABLE IF NOT EXISTS apps (
     user TEXT,
     repositories TEXT,
     icon TEXT,
-    des TEXT
+    des TEXT,
+    category TEXT
 )
 """)
 
@@ -36,26 +37,16 @@ CREATE TABLE IF NOT EXISTS categories (
 )
 """)
 
-# 创建 app_categories 表，用于连接 apps 和 categories
-cursor.execute("""
-CREATE TABLE IF NOT EXISTS app_categories (
-    appId TEXT,
-    category_id INTEGER,
-    FOREIGN KEY (appId) REFERENCES apps (appId),
-    FOREIGN KEY (category_id) REFERENCES categories (id),
-    PRIMARY KEY (appId, category_id)
-)
-""")
-
 # 插入版本信息到 config 表
 cursor.execute("INSERT INTO config (version) VALUES (?)", (data['version'],))
 
 # 插入应用信息到 apps 表和类别信息到 categories 表
 for app in data['apps']:
+    category_str = ','.join(app.get('category', []))
     # 插入应用基本信息到 apps 表
     cursor.execute("""
-    INSERT OR IGNORE INTO apps (appId, name, user, repositories, icon, des) VALUES (?, ?, ?, ?, ?, ?)
-    """, (app['appId'], app['name'], app['user'], app['repositories'], app['icon'], app['des']))
+    INSERT OR IGNORE INTO apps (appId, name, user, repositories, icon, des,category) VALUES (?, ?, ?, ?, ?, ?,?)
+    """, (app['appId'], app['name'], app['user'], app['repositories'], app['icon'], app['des'],category_str))
 
     # 处理类别，将每个类别插入 categories 表，并建立关联
     for category_name in app.get('category', []):
@@ -65,11 +56,7 @@ for app in data['apps']:
         # 获取该类别的 id
         cursor.execute("SELECT id FROM categories WHERE name = ?", (category_name,))
         category_id = cursor.fetchone()[0]
-        
-        # 插入到 app_categories 表，建立应用和类别的关联
-        cursor.execute("""
-        INSERT OR IGNORE INTO app_categories (appId, category_id) VALUES (?, ?)
-        """, (app['appId'], category_id))
+
 
 # 提交事务并关闭连接
 conn.commit()
