@@ -2,6 +2,8 @@ name: Test github actions # 工作流程的名称
  
 on: # 什么时候触发
   push:  # 当有代码推送时触发
+    paths:
+      - 'apps.yaml'
  
 jobs: # 执行的工作
   run_demo_actions:
