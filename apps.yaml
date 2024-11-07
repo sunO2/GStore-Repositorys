@@ -1,4 +1,18 @@
-version: 0.0.8
+version: 0.0.9
+category:
+  - TOOLS #工具
+  - NET # 网络
+  - SAFETY #安全
+  - SOCIAL #社交
+  - OFFICE #办公
+  - PHOTO #照片
+  - ENTERTAINMENT #娱乐
+  - MEDIA #影音
+  - HOOK #钩子
+  - PROXY #代理
+  - TERMINAL #终端
+  - NOTE #笔记
+  - DOWNLOAD #下载器
 apps:
   - name: LibChecker
     user: LibChecker
@@ -7,7 +21,6 @@ apps:
     des: 应用信息检查 通过快照 对比应用更新内容
     appId: com.absinthe.libchecker
     category: 
-      - APPINFO
       - TOOLS
   - name: LocalSend
     user: localsend
@@ -25,7 +38,7 @@ apps:
     icon: https://ghp.ci/https://github.com/AChep/keyguard-app/blob/master/common/src/androidMain/res/mipmap-xxxhdpi/ic_launcher.png?raw=true
     des: Bitwarden 密码管理软件 第三方客户端 
     category:
-      - PASSWORD
+      - SAFETY
       - TOOLS
   - name: findroid
     user: jarnedemeulemeester
@@ -34,9 +47,7 @@ apps:
     icon: https://ghp.ci/https://github.com/jarnedemeulemeester/findroid/blob/main/core/src/main/ic_launcher-playstore.png
     des: Jellyfin 第三方客户端 电影，影视播放器
     category: 
-      - VIDEO
-      - MOVIE
-      - PLAYER
+      - MEDIA
   - name: jellyfin
     user: jellyfin
     repositories: jellyfin-android
@@ -44,9 +55,7 @@ apps:
     icon: https://ghp.ci/https://github.com/jellyfin/jellyfin-android/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
     des: Jellyfin 官方客户端 电影，影视播放器
     category: 
-      - VIDEO
-      - MOVIE
-      - PLAYER
+      - MEDIA
   - name: Bitwarden
     user: bitwarden
     repositories: android
@@ -54,7 +63,7 @@ apps:
     icon: https://store-images.s-microsoft.com/image/apps.9628.15bced16-76b6-40f0-b229-b0fa0f565ba8.a4bafbe6-7354-4f8f-b022-5bd405f680f1.a63587e6-b50f-4673-8e37-16cc614b7873
     des: Bitwarden 密码管理软件 官方客户端 
     category:
-      - PASSWORD
+      - SAFETY
       - TOOLS
   - name: LX Music
     user: lyswhut
@@ -63,8 +72,7 @@ apps:
     icon: https://ghp.ci/https://github.com/lyswhut/lx-music-mobile/blob/master/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
     des: 洛雪音乐助手客户端 音乐播放器
     category:
-      - MUSIC
-      - PLAYER
+      - MEDIA
   - name: FlClash
     user: chen08209
     repositories: FlClash
@@ -73,7 +81,6 @@ apps:
     des: ClashMeta 网络代理客户端
     category:
       - PROXY
-      - CLASH
       - NET
   - name: ClashMeta
     user: MetaCubeX
@@ -83,7 +90,6 @@ apps:
     des: ClashMeta 网络代理客户端
     category:
       - PROXY
-      - CLASH
       - NET
   - name: v2rayNG
     user: 2dust
@@ -103,7 +109,6 @@ apps:
     category:
       - TOOLS
       - TERMINAL
-      - LINUX
   - name: obsidian
     user: obsidianmd
     repositories: obsidian-releases
@@ -112,6 +117,7 @@ apps:
     des: Obsidian是使用Markdown语法的闭源笔记软件。用户可以在笔记间建立双向链接，并且可以探索这些笔记连接形成的关系图谱
     category:
       - NOTE
+      - OFFICE
   - name: Shizuku
     user: RikkaApps
     repositories: Shizuku
@@ -119,8 +125,8 @@ apps:
     icon: https://ghp.ci/https://github.com/RikkaApps/Shizuku/blob/master/manager/src/main/res/mipmap-xxxhdpi/ic_launcher.png
     des: Shizuku 是一款可以帮助普通应用借助一个由app_process 启动的Java 进程直接以adb 或root 特权使用系统API HOOK 系统。
     category:
-      - ANDROID
       - HOOK
+      - TOOLS
   - name: Magisk
     user: topjohnwu
     repositories: Magisk
@@ -128,9 +134,8 @@ apps:
     icon: https://ghp.ci/https://github.com/topjohnwu/Magisk/raw/master/docs/images/logo.png
     des: Magisk（也被称作面具）是一套开放源代码的Android（6.0以上版本）自定义工具套组，内置了Magisk Manager（图形化管理界面）、Root、启动脚本、SElinux补丁和启动时认证/dm-verity/强制加密移除功能。Magisk同时提供了在无需直接修改系统文件的情况下更改/system或/vendor等分区内容的接口，利用与Xposed类似的模块系统，开发者可以对系统进行修改或对所安装的软件功能进行修改等
     category:
-      - ANDROID
       - HOOK
-      - ROOT
+      - TOOLS
   - name: ProxyPin
     user: wanghongenpin
     repositories: proxypin
@@ -147,7 +152,8 @@ apps:
     icon: https://ghp.ci/https://github.com/rustdesk/rustdesk/blob/master/flutter/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
     des: 多平台远程桌面控制软件工具
     category:
-      - REMOTE
+      - OFFICE
+      - TOOLS
   - name: GopeedLab
     user: GopeedLab
     repositories: gopeed
