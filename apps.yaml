@@ -163,3 +163,12 @@ apps:
     category:
       - DOWNLOAD
       - NET
+  - name: GStore
+    user: sunO2
+    repositories: GStore
+    appId: com.suno2.gstore
+    icon: https://ghp.ci/https://github.com/sunO2/GStore/blob/main/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+    des: github 收集的开源软件 应用市场 软件商店
+    category:
+      - DOWNLOAD
+      - TOOLS
