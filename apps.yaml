@@ -1,18 +1,18 @@
 version: 0.0.9
 category:
-  - TOOLS #工具
-  - NET # 网络
-  - SAFETY #安全
-  - SOCIAL #社交
-  - OFFICE #办公
-  - PHOTO #照片
-  - ENTERTAINMENT #娱乐
-  - MEDIA #影音
-  - HOOK #钩子
-  - PROXY #代理
-  - TERMINAL #终端
-  - NOTE #笔记
-  - DOWNLOAD #下载器
+  - TOOLS,工具
+  - NET,网络
+  - SAFETY,安全
+  - SOCIAL,社交
+  - OFFICE,办公
+  - PHOTO,照片
+  - ENTERTAINMENT,娱乐
+  - MEDIA,影音
+  - HOOK,Hook
+  - PROXY,代理
+  - TERMINAL,终端
+  - NOTE,笔记
+  - DOWNLOAD,下载器
 apps:
   - name: LibChecker
     user: LibChecker
