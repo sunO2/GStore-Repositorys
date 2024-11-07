@@ -29,16 +29,27 @@ CREATE TABLE IF NOT EXISTS apps (
 )
 """)
 
-# 创建 categories 表，包含唯一的类别 id 和名称
+# 创建 categorie 表，包含唯一的类别 id 和名称
 cursor.execute("""
-CREATE TABLE IF NOT EXISTS categories (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT UNIQUE
+CREATE TABLE IF NOT EXISTS category (
+    id TEXT PRIMARY KEY,
+    description TEXT NOT NULL
 )
 """)
 
 # 插入版本信息到 config 表
 cursor.execute("INSERT INTO config (version) VALUES (?)", (data['version'],))
+
+# 插入 category 数据
+for cat in data['category']:
+    # 使用 ',' 分割 id 和 description
+    cat_id, cat_description = cat.split(',')
+    # 插入数据到 category 表
+    cursor.execute("""
+    INSERT OR IGNORE INTO category (id, description) VALUES (?, ?)
+    """, (cat_id, cat_description))
+
+
 
 # 插入应用信息到 apps 表和类别信息到 categories 表
 for app in data['apps']:
@@ -47,15 +58,6 @@ for app in data['apps']:
     cursor.execute("""
     INSERT OR IGNORE INTO apps (appId, name, user, repositories, icon, des,category) VALUES (?, ?, ?, ?, ?, ?,?)
     """, (app['appId'], app['name'], app['user'], app['repositories'], app['icon'], app['des'],category_str))
-
-    # 处理类别，将每个类别插入 categories 表，并建立关联
-    for category_name in app.get('category', []):
-        # 插入类别到 categories 表，如果已存在则忽略
-        cursor.execute("INSERT OR IGNORE INTO categories (name) VALUES (?)", (category_name,))
-        
-        # 获取该类别的 id
-        cursor.execute("SELECT id FROM categories WHERE name = ?", (category_name,))
-        category_id = cursor.fetchone()[0]
 
 
 # 提交事务并关闭连接
