@@ -33,7 +33,8 @@ CREATE TABLE IF NOT EXISTS apps (
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS category (
     id TEXT PRIMARY KEY,
-    description TEXT NOT NULL
+    description TEXT NOT NULL,
+    icon TEXT NOT NULL
 )
 """)
 
@@ -43,11 +44,11 @@ cursor.execute("INSERT INTO config (version) VALUES (?)", (data['version'],))
 # 插入 category 数据
 for cat in data['category']:
     # 使用 ',' 分割 id 和 description
-    cat_id, cat_description = cat.split(',')
+    cat_id, cat_description, icon = cat.split(',')
     # 插入数据到 category 表
     cursor.execute("""
-    INSERT OR IGNORE INTO category (id, description) VALUES (?, ?)
-    """, (cat_id, cat_description))
+    INSERT OR IGNORE INTO category (id, description, icon) VALUES (?, ?, ?)
+    """, (cat_id, cat_description,icon))
 
 
 
