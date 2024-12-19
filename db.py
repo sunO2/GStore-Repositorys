@@ -12,7 +12,8 @@ cursor = conn.cursor()
 # 创建 config 表用于存储版本信息
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS config (
-    version TEXT PRIMARY KEY
+    version TEXT PRIMARY KEY,
+    proxy TEXT
 )
 """)
 
@@ -39,7 +40,7 @@ CREATE TABLE IF NOT EXISTS category (
 """)
 
 # 插入版本信息到 config 表
-cursor.execute("INSERT INTO config (version) VALUES (?)", (data['version'],))
+cursor.execute("INSERT INTO config (version, proxy) VALUES (?,?)", (data['version'],data['proxy'],))
 
 # 插入 category 数据
 for cat in data['category']:
