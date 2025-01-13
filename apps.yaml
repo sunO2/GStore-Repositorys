@@ -1,4 +1,4 @@
-version: 0.0.17
+version: 0.0.18
 proxy: https://ghfast.top/
 category:
   - TOOLS,工具,<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="icon" width="128px" height="128.00px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M196.26 733.74c-43.92 0-79.64 35.72-79.64 79.64 0 43.9 35.72 79.62 79.64 79.62 43.9 0 79.62-35.72 79.62-79.62 0-43.92-35.72-79.64-79.62-79.64z m0 139.26c-32.88 0-59.64-26.76-59.64-59.62 0-32.88 26.76-59.64 59.64-59.64 32.86 0 59.62 26.76 59.62 59.64 0 32.86-26.76 59.62-59.62 59.62z" fill="#23130D" /><path d="M924.46 753.8L661.22 490.56l96.42-106.52c9.24 1.58 18.48 2.42 27.66 2.42 42.46 0 83.54-16.7 114.28-47.44 46.08-46.1 60.06-114.9 35.58-175.32a8.56 8.56 0 0 0-0.94-1.8 9.76 9.76 0 0 0-2.78-2.8c-0.24-0.16-0.5-0.28-0.76-0.4-0.32-0.18-0.62-0.38-0.96-0.52-0.28-0.12-0.58-0.18-0.88-0.28-0.32-0.1-0.64-0.22-0.98-0.28-0.26-0.06-0.54-0.06-0.8-0.1-0.38-0.04-0.74-0.1-1.12-0.1-0.28 0-0.58 0.06-0.86 0.08-0.36 0.02-0.7 0.02-1.06 0.1-1.28 0.24-2.52 0.74-3.66 1.48-0.56 0.38-1.08 0.8-1.56 1.28l-114.74 114.74-69.56-69.54 114.76-114.76a9.86 9.86 0 0 0 2.76-5.22c0.06-0.3 0.06-0.58 0.08-0.88 0.04-0.34 0.1-0.7 0.1-1.04-0.02-0.34-0.06-0.66-0.1-0.98-0.04-0.32-0.04-0.64-0.1-0.94-0.08-0.3-0.18-0.6-0.28-0.88-0.08-0.34-0.16-0.66-0.3-0.98-0.12-0.32-0.3-0.6-0.48-0.9-0.14-0.26-0.26-0.54-0.42-0.8-0.72-1.1-1.68-2.04-2.8-2.8-0.56-0.38-1.16-0.68-1.78-0.94-60.42-24.46-129.24-10.5-175.34 35.6-37.4 37.38-54 90.08-45.04 141.98l-164.48 148.9-218.6-218.58-27.54-71.56a9.968 9.968 0 0 0-5.12-5.48L125.5 66.2c-3.8-1.76-8.3-0.98-11.28 2L66.88 115.54a9.996 9.996 0 0 0-2 11.28l39.1 84.32c1.08 2.36 3.06 4.2 5.48 5.14L181 243.8l215.54 215.52L105.9 722.34c-0.06 0.06-0.12 0.14-0.18 0.2-0.06 0.04-0.12 0.08-0.16 0.12-50 50.02-50 131.4 0 181.4 25 25 57.84 37.5 90.7 37.5 32.84 0 65.68-12.5 90.68-37.5 0.06-0.04 0.1-0.12 0.16-0.18s0.14-0.1 0.2-0.18l210.5-232.6 254.68 254.68c22.96 22.96 53.48 35.6 85.96 35.6s63.02-12.64 85.98-35.62c22.98-22.96 35.62-53.5 35.64-85.98 0-32.48-12.64-63.02-35.6-85.98zM643.14 263.1l0.24-0.3c0.2-0.18 0.38-0.4 0.56-0.6 0.26-0.3 0.52-0.6 0.72-0.9 0.14-0.2 0.26-0.42 0.38-0.62 0.2-0.36 0.4-0.7 0.56-1.08 0.1-0.22 0.16-0.46 0.24-0.68 0.12-0.38 0.26-0.74 0.34-1.12 0.04-0.26 0.08-0.54 0.1-0.8 0.06-0.38 0.1-0.74 0.12-1.12 0-0.28-0.02-0.54-0.04-0.8-0.02-0.4-0.06-0.78-0.12-1.18-0.02-0.1-0.02-0.18-0.04-0.28-9.84-47.08 4.56-95.48 38.54-129.44a141.708 141.708 0 0 1 139.06-36.22l-110.5 110.52a9.97 9.97 0 0 0 0 14.14l83.68 83.7c1.88 1.88 4.42 2.92 7.08 2.92 2.64 0 5.18-1.04 7.06-2.92l110.52-110.52c13.96 49.16 0.52 102.36-36.22 139.08-33.96 33.98-82.34 48.38-129.42 38.52-0.12-0.02-0.22 0-0.32-0.02a7.74 7.74 0 0 0-0.98-0.1c-0.34-0.04-0.68-0.06-1.02-0.06-0.28 0.02-0.52 0.06-0.78 0.08-0.4 0.04-0.78 0.08-1.16 0.16-0.24 0.06-0.46 0.14-0.68 0.22-0.4 0.12-0.78 0.22-1.14 0.4-0.22 0.08-0.42 0.22-0.64 0.32-0.36 0.2-0.72 0.4-1.06 0.64-0.18 0.12-0.34 0.26-0.52 0.4-0.34 0.28-0.68 0.58-1 0.92-0.04 0.04-0.1 0.08-0.16 0.14l-99.48 109.9-19.4-19.4a10.006 10.006 0 0 0-7.08-2.94c-2.66 0-5.2 1.06-7.06 2.94l-48.18 48.18-90.1-90.1 167.9-151.98zM193.62 228.14c-0.02-0.02-0.06-0.04-0.08-0.06-0.18-0.18-0.38-0.3-0.56-0.46-0.32-0.28-0.66-0.58-1.02-0.8-0.02-0.02-0.08-0.04-0.1-0.06-0.54-0.34-1.1-0.62-1.7-0.86h-0.02L120.42 199.06 85.96 124.74l37.46-37.46 74.3 34.46 26.82 69.64c0.44 1.2 1.14 2.32 2.06 3.3 0.04 0.04 0.08 0.1 0.12 0.14 0.04 0.04 0.06 0.08 0.1 0.12L551.2 519.32 518 552.5 193.62 228.14z m79.12 661.84c-42.22 42.14-110.84 42.12-153.04-0.06-42.18-42.18-42.2-110.82-0.06-153.04l291.06-263.4 93.16 93.16-48.18 48.2a9.97 9.97 0 0 0 0 14.14l27.96 27.96-210.9 233.04z m637.54 21.64c-19.18 19.2-44.7 29.76-71.84 29.76s-52.64-10.56-71.82-29.74L504.16 649.18v-0.02h-0.02l-27.26-27.26 143.7-143.7 289.74 289.74c19.18 19.18 29.74 44.7 29.74 71.84-0.02 27.14-10.58 52.64-29.78 71.84z" fill="#23130D" /><path d="M910.32 767.94L620.58 478.2l-143.7 143.7 27.26 27.26h0.02v0.02l262.46 262.46c19.18 19.18 44.68 29.74 71.82 29.74 27.14 0 52.66-10.56 71.84-29.76 19.2-19.2 29.76-44.7 29.78-71.84 0-27.14-10.56-52.66-29.74-71.84z m-83.5 107.54a9.88 9.88 0 0 1-7.06 2.92 9.96 9.96 0 0 1-7.08-2.92L562.38 625.16a9.97 9.97 0 0 1 0-14.14 10.006 10.006 0 0 1 14.14 0l250.3 250.32a10.006 10.006 0 0 1 0 14.14z m47.34-47.32c-1.94 1.94-4.5 2.92-7.06 2.92-2.56 0-5.12-0.98-7.08-2.92L609.7 577.84a10.006 10.006 0 0 1 0-14.14 9.97 9.97 0 0 1 14.14 0l250.32 250.32a9.97 9.97 0 0 1 0 14.14z" fill="#F9C139" /><path d="M910.32 767.94L620.58 478.2l-25 25 289.74 289.74c19.18 19.18 29.74 44.7 29.74 71.84-0.02 21.16-6.44 41.32-18.36 58.26 4.8-3.36 9.34-7.18 13.58-11.42 19.2-19.2 29.76-44.7 29.78-71.84 0-27.14-10.56-52.66-29.74-71.84z" fill="#23130D" opacity=".2" /><path d="M551.2 519.32L518 552.5 193.62 228.14c-0.02-0.02-0.06-0.04-0.08-0.06-0.18-0.18-0.38-0.3-0.56-0.46-0.32-0.28-0.66-0.58-1.02-0.8-0.02-0.02-0.08-0.04-0.1-0.06-0.54-0.34-1.1-0.62-1.7-0.86h-0.02L120.42 199.06 85.96 124.74l37.46-37.46 74.3 34.46 26.82 69.64c0.44 1.2 1.14 2.32 2.06 3.3 0.04 0.04 0.08 0.1 0.12 0.14 0.04 0.04 0.06 0.08 0.1 0.12L551.2 519.32z" fill="#E1E1E5" /><path d="M551.2 519.32l-16.5 16.5-324.38-324.38c-0.04-0.04-0.06-0.08-0.1-0.12-0.04-0.04-0.08-0.1-0.12-0.14-0.92-0.98-1.62-2.1-2.06-3.3L181.22 138.24 106.92 103.78l16.5-16.5 74.3 34.46 26.82 69.64c0.44 1.2 1.14 2.32 2.06 3.3 0.04 0.04 0.08 0.1 0.12 0.14 0.04 0.04 0.06 0.08 0.1 0.12L551.2 519.32z" fill="#23130D" opacity=".2" /><path d="M455.68 614.84l48.18-48.2-93.16-93.16-291.06 263.4c-42.14 42.22-42.12 110.86 0.06 153.04 42.2 42.18 110.82 42.2 153.04 0.06l210.9-233.04-27.96-27.96a9.97 9.97 0 0 1 0-14.14zM196.26 893c-43.92 0-79.64-35.72-79.64-79.62 0-43.92 35.72-79.64 79.64-79.64 43.9 0 79.62 35.72 79.62 79.64 0 43.9-35.72 79.62-79.62 79.62z" fill="#E1E1E5" /><path d="M410.7 473.48L119.64 736.88a109.09 109.09 0 0 0-7.4 8.2l282.46-255.6 93.16 93.16 16-16-93.16-93.16z m44.98 141.36l-16 16a9.97 9.97 0 0 0 0 14.14l27.96 27.96-203.1 224.44c2.82-2.3 5.56-4.76 8.2-7.4l210.9-233.04-27.96-27.96a9.97 9.97 0 0 1 0-14.14z" fill="#23130D" opacity=".2" /><path d="M885.42 324.88c-33.96 33.98-82.34 48.38-129.42 38.52-0.12-0.02-0.22 0-0.32-0.02a7.74 7.74 0 0 0-0.98-0.1c-0.34-0.04-0.68-0.06-1.02-0.06-0.28 0.02-0.52 0.06-0.78 0.08-0.4 0.04-0.78 0.08-1.16 0.16-0.24 0.06-0.46 0.14-0.68 0.22-0.4 0.12-0.78 0.22-1.14 0.4-0.22 0.08-0.42 0.22-0.64 0.32-0.36 0.2-0.72 0.4-1.06 0.64-0.18 0.12-0.34 0.26-0.52 0.4-0.34 0.28-0.68 0.58-1 0.92-0.04 0.04-0.1 0.08-0.16 0.14l-99.48 109.9-19.4-19.4a10.006 10.006 0 0 0-7.08-2.94c-2.66 0-5.2 1.06-7.06 2.94l-48.18 48.18-90.1-90.1 167.9-151.98 0.24-0.3c0.2-0.18 0.38-0.4 0.56-0.6 0.26-0.3 0.52-0.6 0.72-0.9 0.14-0.2 0.26-0.42 0.38-0.62 0.2-0.36 0.4-0.7 0.56-1.08 0.1-0.22 0.16-0.46 0.24-0.68 0.12-0.38 0.26-0.74 0.34-1.12 0.04-0.26 0.08-0.54 0.1-0.8 0.06-0.38 0.1-0.74 0.12-1.12 0-0.28-0.02-0.54-0.04-0.8-0.02-0.4-0.06-0.78-0.12-1.18-0.02-0.1-0.02-0.18-0.04-0.28-9.84-47.08 4.56-95.48 38.54-129.44a141.708 141.708 0 0 1 139.06-36.22l-110.5 110.52a9.97 9.97 0 0 0 0 14.14l83.68 83.7c1.88 1.88 4.42 2.92 7.08 2.92 2.64 0 5.18-1.04 7.06-2.92l110.52-110.52c13.96 49.16 0.52 102.36-36.22 139.08z" fill="#E1E1E5" /><path d="M493.62 398.46l89.22 89.22-17.5 17.5-90.1-90.1zM645.16 439.5l18.52 18.52-16.62 18.38-19.4-19.4a10.006 10.006 0 0 0-7.08-2.94c-2.66 0-5.2 1.06-7.06 2.94l17.5-17.5c1.86-1.88 4.4-2.94 7.06-2.94 2.66 0 5.2 1.06 7.08 2.94z" fill="#23130D" opacity=".2" /><path d="M826.82 875.48a9.88 9.88 0 0 1-7.06 2.92 9.96 9.96 0 0 1-7.08-2.92L562.38 625.16a9.97 9.97 0 0 1 0-14.14 10.006 10.006 0 0 1 14.14 0l250.3 250.32a10.006 10.006 0 0 1 0 14.14zM874.16 828.16c-1.94 1.94-4.5 2.92-7.06 2.92-2.56 0-5.12-0.98-7.08-2.92L609.7 577.84a10.006 10.006 0 0 1 0-14.14 9.97 9.97 0 0 1 14.14 0l250.32 250.32a9.97 9.97 0 0 1 0 14.14z" fill="#FFFFFF" /></svg>
@@ -18,7 +18,7 @@ apps:
   - name: LibChecker
     user: LibChecker
     repositories: LibChecker
-    icon: https://ghgo.xyz/https://github.com/LibChecker/LibChecker/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+    icon: https://ghfast.top/https://github.com/LibChecker/LibChecker/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
     des: 应用信息检查 通过快照 对比应用更新内容
     appId: com.absinthe.libchecker
     category: 
@@ -27,7 +27,7 @@ apps:
     user: localsend
     repositories: localsend
     appId: org.localsend.localsend_app
-    icon: https://ghgo.xyz/https://github.com/localsend/localsend/blob/main/app/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true
+    icon: https://ghfast.top/https://github.com/localsend/localsend/blob/main/app/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true
     des: 多平台局域网文件传输 类似快传
     category: 
       - TOOLS
@@ -36,7 +36,7 @@ apps:
     user: AChep
     repositories: keyguard-app
     appId: com.artemchep.keyguard
-    icon: https://ghgo.xyz/https://github.com/AChep/keyguard-app/blob/master/common/src/androidMain/res/mipmap-xxxhdpi/ic_launcher.png?raw=true
+    icon: https://ghfast.top/https://github.com/AChep/keyguard-app/blob/master/common/src/androidMain/res/mipmap-xxxhdpi/ic_launcher.png?raw=true
     des: Bitwarden 密码管理软件 第三方客户端 
     category:
       - SAFETY
@@ -45,7 +45,7 @@ apps:
     user: jarnedemeulemeester
     repositories: findroid
     appId: dev.jdtech.jellyfin
-    icon: https://ghgo.xyz/https://github.com/jarnedemeulemeester/findroid/blob/main/core/src/main/ic_launcher-playstore.png
+    icon: https://ghfast.top/https://github.com/jarnedemeulemeester/findroid/blob/main/core/src/main/ic_launcher-playstore.png
     des: Jellyfin 第三方客户端 电影，影视播放器
     category: 
       - MEDIA
@@ -53,7 +53,7 @@ apps:
     user: jellyfin
     repositories: jellyfin-android
     appId: org.jellyfin.mobile
-    icon: https://ghgo.xyz/https://github.com/jellyfin/jellyfin-android/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+    icon: https://ghfast.top/https://github.com/jellyfin/jellyfin-android/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
     des: Jellyfin 官方客户端 电影，影视播放器
     category: 
       - MEDIA
@@ -70,7 +70,7 @@ apps:
     user: lyswhut
     repositories: lx-music-mobile
     appId: cn.toside.music.mobile
-    icon: https://ghgo.xyz/https://github.com/lyswhut/lx-music-mobile/blob/master/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+    icon: https://ghfast.top/https://github.com/lyswhut/lx-music-mobile/blob/master/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
     des: 洛雪音乐助手客户端 音乐播放器
     category:
       - MEDIA
@@ -78,7 +78,7 @@ apps:
     user: chen08209
     repositories: FlClash
     appId: com.follow.clash
-    icon: https://ghgo.xyz/https://github.com/chen08209/FlClash/blob/main/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp
+    icon: https://ghfast.top/https://github.com/chen08209/FlClash/blob/main/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp
     des: ClashMeta 网络代理客户端
     category:
       - PROXY
@@ -87,7 +87,7 @@ apps:
     user: MetaCubeX
     repositories: ClashMetaForAndroid
     appId: com.github.kr328.clash
-    icon: https://ghgo.xyz/https://github.com/MetaCubeX/ClashMetaForAndroid/blob/main/app/src/main/ic_launcher-playstore.png
+    icon: https://ghfast.top/https://github.com/MetaCubeX/ClashMetaForAndroid/blob/main/app/src/main/ic_launcher-playstore.png
     des: ClashMeta 网络代理客户端
     category:
       - PROXY
@@ -96,7 +96,7 @@ apps:
     user: 2dust
     repositories: v2rayNG
     appId: com.v2ray.ang
-    icon: https://ghgo.xyz/https://github.com/2dust/v2rayNG/blob/master/V2rayNG/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+    icon: https://ghfast.top/https://github.com/2dust/v2rayNG/blob/master/V2rayNG/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
     des: V2ray Android V2ray协议 网络代理客户端
     category:
       - PROXY
@@ -105,7 +105,7 @@ apps:
     user: termux
     repositories: termux-app
     appId: com.termux
-    icon: https://ghgo.xyz/https://github.com/termux/termux-app/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+    icon: https://ghfast.top/https://github.com/termux/termux-app/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
     des: termux是一个Android终端仿真器和Linux环境应用程序，直接工作，无需根目录或设置。一个最小的基本系统被自动安装-额外的软件包可以使用APT软件包管理器来使用
     category:
       - TOOLS
@@ -123,7 +123,7 @@ apps:
     user: RikkaApps
     repositories: Shizuku
     appId: moe.shizuku.privileged.api
-    icon: https://ghgo.xyz/https://github.com/RikkaApps/Shizuku/blob/master/manager/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+    icon: https://ghfast.top/https://github.com/RikkaApps/Shizuku/blob/master/manager/src/main/res/mipmap-xxxhdpi/ic_launcher.png
     des: Shizuku 是一款可以帮助普通应用借助一个由app_process 启动的Java 进程直接以adb 或root 特权使用系统API HOOK 系统。
     category:
       - HOOK
@@ -132,7 +132,7 @@ apps:
     user: topjohnwu
     repositories: Magisk
     appId: com.topjohnwu.magisk
-    icon: https://ghgo.xyz/https://github.com/topjohnwu/Magisk/raw/master/docs/images/logo.png
+    icon: https://ghfast.top/https://github.com/topjohnwu/Magisk/raw/master/docs/images/logo.png
     des: Magisk（也被称作面具）是一套开放源代码的Android（6.0以上版本）自定义工具套组，内置了Magisk Manager（图形化管理界面）、Root、启动脚本、SElinux补丁和启动时认证/dm-verity/强制加密移除功能。Magisk同时提供了在无需直接修改系统文件的情况下更改/system或/vendor等分区内容的接口，利用与Xposed类似的模块系统，开发者可以对系统进行修改或对所安装的软件功能进行修改等
     category:
       - HOOK
@@ -141,7 +141,7 @@ apps:
     user: wanghongenpin
     repositories: proxypin
     appId: com.network.proxy
-    icon: https://ghgo.xyz/https://github.com/wanghongenpin/proxypin/blob/main/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+    icon: https://ghfast.top/https://github.com/wanghongenpin/proxypin/blob/main/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
     des: 多平台网络抓包工具
     category:
       - NET
@@ -150,7 +150,7 @@ apps:
     user: rustdesk
     repositories: rustdesk
     appId: com.carriez.flutter_hbb
-    icon: https://ghgo.xyz/https://github.com/rustdesk/rustdesk/blob/master/flutter/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+    icon: https://ghfast.top/https://github.com/rustdesk/rustdesk/blob/master/flutter/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
     des: 多平台远程桌面控制软件工具
     category:
       - OFFICE
@@ -159,7 +159,7 @@ apps:
     user: GopeedLab
     repositories: gopeed
     appId: com.gopeed
-    icon: https://ghgo.xyz/https://github.com/GopeedLab/gopeed/blob/main/ui/flutter/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+    icon: https://ghfast.top/https://github.com/GopeedLab/gopeed/blob/main/ui/flutter/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
     des: 多平台下载器 下载速度飞快
     category:
       - DOWNLOAD
@@ -168,7 +168,7 @@ apps:
     user: sunO2
     repositories: GStore
     appId: com.suno2.gstore
-    icon: https://ghgo.xyz/https://github.com/sunO2/GStore/blob/main/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+    icon: https://ghfast.top/https://github.com/sunO2/GStore/blob/main/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
     des: github 收集的开源软件 应用市场 软件商店
     category:
       - DOWNLOAD
@@ -177,7 +177,7 @@ apps:
     user: T8RIN
     repositories: ImageToolbox
     appId: ru.tech.imageresizershrinker
-    icon: https://ghgo.xyz/https://github.com/T8RIN/ImageToolbox/blob/master/core/resources/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp
+    icon: https://ghfast.top/https://github.com/T8RIN/ImageToolbox/blob/master/core/resources/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp
     des: ImageToolbox是一个多功能的图像编辑工具，专为高效的照片操作而设计。它允许用户裁剪，应用过滤器，编辑EXIF数据，擦除背景，甚至将图像转换为pdf。该工具是摄影师和开发人员的理想选择，提供了具有强大功能的简单界面。
     category:
       - PHOTO
@@ -186,7 +186,7 @@ apps:
     user: anilbeesetti
     repositories: nextplayer
     appId: dev.anilbeesetti.nextplayer
-    icon: https://ghgo.xyz/https://github.com/anilbeesetti/nextplayer/blob/main/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp
+    icon: https://ghfast.top/https://github.com/anilbeesetti/nextplayer/blob/main/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp
     des: "Next Player 是一个用 Kotlin 和 jetpack 编写的原生视频播放器。它为用户在 Android 设备上播放视频提供了简单易用的界面"
     category:
       - MEDIA
