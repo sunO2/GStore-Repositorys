@@ -1,3 +1,5 @@
 {
-  "proxy":"https://ghfast.top/"
+  "proxy":[
+    "app":"https://ghfast.top/"
+  ]
 }
