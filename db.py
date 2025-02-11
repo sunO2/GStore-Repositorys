@@ -1,5 +1,7 @@
 import sqlite3
 import yaml
+import json
+import os
 
 # 读取 YAML 文件内容
 with open("apps.yaml", "r", encoding="utf-8") as file:
