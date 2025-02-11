@@ -5,6 +5,27 @@ import yaml
 with open("apps.yaml", "r", encoding="utf-8") as file:
     data = yaml.safe_load(file)
 
+# 尝试读取 db.json 文件并获取 proxy.url 值
+db_json_path = "db.json"
+if os.path.exists(db_json_path):
+    try:
+        with open(db_json_path, "r", encoding="utf-8") as db_file:
+            db_data = json.load(db_file)
+            if 'proxy' in db_data and 'url' in db_data['proxy']:
+                db_proxy_url = db_data['proxy']['url']
+                data['proxy'] = db_proxy_url  # 覆盖 apps.yaml 中的 proxy 值
+                print(f"Proxy value updated from db.json: {db_proxy_url}")
+            else:
+                print("db.json found, but 'proxy.url' field not found. Using proxy from apps.yaml.")
+    except json.JSONDecodeError:
+        print("Error decoding db.json. Using proxy from apps.yaml.")
+    except FileNotFoundError:
+        # This should not happen as we already checked with os.path.exists, but for robustness
+        print(f"{db_json_path} not found (after existence check). Using proxy from apps.yaml.")
+else:
+    print(f"{db_json_path} not found. Using proxy from apps.yaml.")
+
+
 # 连接到 SQLite 数据库（如果不存在会自动创建）
 conn = sqlite3.connect("config.db")
 cursor = conn.cursor()
