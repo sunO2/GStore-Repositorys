@@ -1,0 +1,8 @@
+appId: com.absinthe.libchecker
+category:
+    - TOOLS
+des: 应用信息检查 通过快照 对比应用更新内容
+icon: https://ghfast.top/https://github.com/LibChecker/LibChecker/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+name: LibChecker
+repositories: LibChecker
+user: LibChecker

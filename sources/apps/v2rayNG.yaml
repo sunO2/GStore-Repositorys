@@ -1,0 +1,9 @@
+appId: com.v2ray.ang
+category:
+    - PROXY
+    - NET
+des: V2ray Android V2ray协议 网络代理客户端
+icon: https://ghfast.top/https://github.com/2dust/v2rayNG/blob/master/V2rayNG/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+name: v2rayNG
+repositories: v2rayNG
+user: 2dust

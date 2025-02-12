@@ -1,0 +1,10 @@
+appId: com.pocketpalai
+category:
+    - TOOLS
+    - AI
+des: 口袋AI是一款强大的离线AI助手，让你随时随地与AI对话！
+    基于小型语言模型(SLMs)，无需联网即可在手机上运行，是PocketPal AI项目的中文优化版本。
+icon: https://ghfast.top/https://github.com/a-ghorbani/pocketpal-ai/blob/main/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png
+name: pocketpal-ai
+repositories: pocketpal-ai
+user: a-ghorbani

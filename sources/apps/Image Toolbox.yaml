@@ -1,0 +1,9 @@
+appId: ru.tech.imageresizershrinker
+category:
+    - PHOTO
+    - TOOLS
+des: ImageToolbox是一个多功能的图像编辑工具，专为高效的照片操作而设计。它允许用户裁剪，应用过滤器，编辑EXIF数据，擦除背景，甚至将图像转换为pdf。该工具是摄影师和开发人员的理想选择，提供了具有强大功能的简单界面。
+icon: https://ghfast.top/https://github.com/T8RIN/ImageToolbox/blob/master/core/resources/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp
+name: Image Toolbox
+repositories: ImageToolbox
+user: T8RIN

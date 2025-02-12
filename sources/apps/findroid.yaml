@@ -1,0 +1,8 @@
+appId: dev.jdtech.jellyfin
+category:
+    - MEDIA
+des: Jellyfin 第三方客户端 电影，影视播放器
+icon: https://ghfast.top/https://github.com/jarnedemeulemeester/findroid/blob/main/core/src/main/ic_launcher-playstore.png
+name: findroid
+repositories: findroid
+user: jarnedemeulemeester

@@ -1,0 +1,9 @@
+appId: com.gopeed
+category:
+    - DOWNLOAD
+    - NET
+des: 多平台下载器 下载速度飞快
+icon: https://ghfast.top/https://github.com/GopeedLab/gopeed/blob/main/ui/flutter/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+name: GopeedLab
+repositories: gopeed
+user: GopeedLab

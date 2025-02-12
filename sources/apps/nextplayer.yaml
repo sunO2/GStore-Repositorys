@@ -1,0 +1,8 @@
+appId: dev.anilbeesetti.nextplayer
+category:
+    - MEDIA
+des: Next Player 是一个用 Kotlin 和 jetpack 编写的原生视频播放器。它为用户在 Android 设备上播放视频提供了简单易用的界面
+icon: https://ghfast.top/https://github.com/anilbeesetti/nextplayer/blob/main/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp
+name: nextplayer
+repositories: nextplayer
+user: anilbeesetti

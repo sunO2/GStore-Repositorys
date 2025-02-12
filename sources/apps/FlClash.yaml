@@ -1,0 +1,9 @@
+appId: com.follow.clash
+category:
+    - PROXY
+    - NET
+des: ClashMeta 网络代理客户端
+icon: https://ghfast.top/https://github.com/chen08209/FlClash/blob/main/android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.webp
+name: FlClash
+repositories: FlClash
+user: chen08209

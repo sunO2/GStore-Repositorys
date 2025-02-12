@@ -3,7 +3,7 @@ name: Test github actions # 工作流程的名称
 on: # 什么时候触发
   push:  # 当有代码推送时触发
     paths:
-      - 'apps.yaml'
+      - 'db.json'
  
 jobs: # 执行的工作
   run_demo_actions:
@@ -22,7 +22,7 @@ jobs: # 执行的工作
           pip install -r ./requirements.txt 
  
       - name: Run main.py
-        run: python db.py # 执行py文件    依据自己代码要运行的py情况而定
+        run: python build_apps_db.py # 执行py文件    依据自己代码要运行的py情况而定
       - name: read-yaml-file
         uses: pietrobolcato/action-read-yaml@1.1.0
         id: read_action_js
@@ -49,6 +49,6 @@ jobs: # 执行的工作
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./config.db
+          asset_path: ./apps.db
           asset_name: apps.db
           asset_content_type: application/zip

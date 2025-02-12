@@ -1,0 +1,10 @@
+appId: md.obsidian
+category:
+    - NOTE
+    - OFFICE
+des: Obsidian是使用Markdown语法的闭源笔记软件。
+    用户可以在笔记间建立双向链接，并且可以探索这些笔记连接形成的关系图谱
+icon: https://forum.obsidian.md/uploads/default/optimized/3X/9/f/9f1b5b46aed533f5386cf276ab2cdce48cbd2e25_2_200x200.png
+name: obsidian
+repositories: obsidian-releases
+user: obsidianmd

@@ -1,0 +1,9 @@
+appId: moe.shizuku.privileged.api
+category:
+    - HOOK
+    - TOOLS
+des: Shizuku 是一款可以帮助普通应用借助一个由app_process 启动的Java 进程直接以adb 或root 特权使用系统API HOOK 系统。
+icon: https://ghfast.top/https://github.com/RikkaApps/Shizuku/blob/master/manager/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+name: Shizuku
+repositories: Shizuku
+user: RikkaApps

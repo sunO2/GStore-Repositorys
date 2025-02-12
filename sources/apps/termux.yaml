@@ -1,0 +1,9 @@
+appId: com.termux
+category:
+    - TOOLS
+    - TERMINAL
+des: termux是一个Android终端仿真器和Linux环境应用程序，直接工作，无需根目录或设置。一个最小的基本系统被自动安装-额外的软件包可以使用APT软件包管理器来使用
+icon: https://ghfast.top/https://github.com/termux/termux-app/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+name: termux
+repositories: termux-app
+user: termux

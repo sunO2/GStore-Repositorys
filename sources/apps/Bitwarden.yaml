@@ -1,0 +1,9 @@
+appId: com.x8bit.bitwarden
+category:
+    - SAFETY
+    - TOOLS
+des: Bitwarden 密码管理软件 官方客户端
+icon: https://store-images.s-microsoft.com/image/apps.9628.15bced16-76b6-40f0-b229-b0fa0f565ba8.a4bafbe6-7354-4f8f-b022-5bd405f680f1.a63587e6-b50f-4673-8e37-16cc614b7873
+name: Bitwarden
+repositories: android
+user: bitwarden

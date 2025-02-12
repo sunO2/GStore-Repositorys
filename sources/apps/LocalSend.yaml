@@ -1,0 +1,9 @@
+appId: org.localsend.localsend_app
+category:
+    - TOOLS
+    - NET
+des: 多平台局域网文件传输 类似快传
+icon: https://ghfast.top/https://github.com/localsend/localsend/blob/main/app/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png?raw=true
+name: LocalSend
+repositories: localsend
+user: localsend

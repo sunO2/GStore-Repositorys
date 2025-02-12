@@ -1,0 +1,8 @@
+appId: cn.toside.music.mobile
+category:
+    - MEDIA
+des: 洛雪音乐助手客户端 音乐播放器
+icon: https://ghfast.top/https://github.com/lyswhut/lx-music-mobile/blob/master/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+name: LX Music
+repositories: lx-music-mobile
+user: lyswhut

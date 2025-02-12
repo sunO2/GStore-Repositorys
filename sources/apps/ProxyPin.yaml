@@ -1,0 +1,9 @@
+appId: com.network.proxy
+category:
+    - NET
+    - HOOK
+des: 多平台网络抓包工具
+icon: https://ghfast.top/https://github.com/wanghongenpin/proxypin/blob/main/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+name: ProxyPin
+repositories: proxypin
+user: wanghongenpin

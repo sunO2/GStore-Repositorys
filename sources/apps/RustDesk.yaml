@@ -1,0 +1,9 @@
+appId: com.carriez.flutter_hbb
+category:
+    - OFFICE
+    - TOOLS
+des: 多平台远程桌面控制软件工具
+icon: https://ghfast.top/https://github.com/rustdesk/rustdesk/blob/master/flutter/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+name: RustDesk
+repositories: rustdesk
+user: rustdesk

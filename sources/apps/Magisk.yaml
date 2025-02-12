@@ -1,0 +1,9 @@
+appId: com.topjohnwu.magisk
+category:
+    - HOOK
+    - TOOLS
+des: Magisk（也被称作面具）是一套开放源代码的Android（6.0以上版本）自定义工具套组，内置了Magisk Manager（图形化管理界面）、Root、启动脚本、SElinux补丁和启动时认证/dm-verity/强制加密移除功能。Magisk同时提供了在无需直接修改系统文件的情况下更改/system或/vendor等分区内容的接口，利用与Xposed类似的模块系统，开发者可以对系统进行修改或对所安装的软件功能进行修改等
+icon: https://ghfast.top/https://github.com/topjohnwu/Magisk/raw/master/docs/images/logo.png
+name: Magisk
+repositories: Magisk
+user: topjohnwu

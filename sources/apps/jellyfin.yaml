@@ -1,0 +1,8 @@
+appId: org.jellyfin.mobile
+category:
+    - MEDIA
+des: Jellyfin 官方客户端 电影，影视播放器
+icon: https://ghfast.top/https://github.com/jellyfin/jellyfin-android/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+name: jellyfin
+repositories: jellyfin-android
+user: jellyfin

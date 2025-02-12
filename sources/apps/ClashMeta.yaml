@@ -1,0 +1,9 @@
+appId: com.github.kr328.clash
+category:
+    - PROXY
+    - NET
+des: ClashMeta 网络代理客户端
+icon: https://ghfast.top/https://github.com/MetaCubeX/ClashMetaForAndroid/blob/main/app/src/main/ic_launcher-playstore.png
+name: ClashMeta
+repositories: ClashMetaForAndroid
+user: MetaCubeX

@@ -1,0 +1,9 @@
+appId: com.artemchep.keyguard
+category:
+    - SAFETY
+    - TOOLS
+des: Bitwarden 密码管理软件 第三方客户端
+icon: https://ghfast.top/https://github.com/AChep/keyguard-app/blob/master/common/src/androidMain/res/mipmap-xxxhdpi/ic_launcher.png?raw=true
+name: keyguard
+repositories: keyguard-app
+user: AChep

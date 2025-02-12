@@ -1,0 +1,9 @@
+appId: com.suno2.gstore
+category:
+    - DOWNLOAD
+    - TOOLS
+des: github 收集的开源软件 应用市场 软件商店
+icon: https://ghfast.top/https://github.com/sunO2/GStore/blob/main/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+name: GStore
+repositories: GStore
+user: sunO2
