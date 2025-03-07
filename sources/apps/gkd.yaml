@@ -2,6 +2,7 @@ appId: li.songe.gkd
 category:
     - SAFETY
     - TOOLS
+    - HOT
 des: 基于 无障碍 + 高级选择器 + 订阅规则 的自定义屏幕点击 APP
 icon: https://ghfast.top/https://github.com/gkd-kit/gkd/blob/main/app/src/main/res/mipmap/gkd_black.png
 name: GKD
