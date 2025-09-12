@@ -1,0 +1,9 @@
+appId: org.fcitx.fcitx5.android
+category:
+    - TOOLS
+    - HOT
+des: fcitx5 Android 版本输入法
+icon: https://ghfast.top/https://github.com/fcitx5-android/fcitx5-android/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+name: fcitx5
+repositories: fcitx5-android
+user: fcitx5-android
