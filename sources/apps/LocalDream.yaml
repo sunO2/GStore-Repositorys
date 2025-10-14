@@ -1,0 +1,9 @@
+appId: io.github.xororz.localdream
+category:
+    - AI
+    - PHOTO
+des: Android Stable Diffusion with Snapdragon NPU acceleration
+icon: https://ghfast.top/https://github.com/xororz/local-dream/blob/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp
+name: Local Dream
+repositories: local-dream
+user: xororz
