@@ -1,6 +1,6 @@
 {
   "app":{
-    "version":"0.0.24"
+    "version":"0.0.25"
   },
   "proxy": {
     "url":"https://ghfast.top/"
