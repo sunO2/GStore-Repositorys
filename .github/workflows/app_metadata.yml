@@ -128,13 +128,20 @@ jobs:
             git pull --rebase origin main
           done
 
+      - name: 拉取最新代码（包含刚提交的元数据）
+        if: always() && steps.parse.outputs.invalid != 'yes'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull origin main --rebase
+
       - name: 评论处理结果并关闭 issue
         if: always() && steps.parse.outputs.invalid != 'yes'
         uses: actions/github-script@v7
         env:
           OWNER: ${{ steps.parse.outputs.owner }}
           REPO: ${{ steps.parse.outputs.repo }}
-          PUSHED: ${{ steps.commit.outputs.pushed }}
         with:
           script: |
             const owner = process.env.OWNER;
@@ -159,7 +166,7 @@ jobs:
                      `| 版本号 | ${meta.versionCode || '-'} |\n` +
                      `| Release 标签 | ${meta.sourceTag || '-'} |\n\n` +
                      `元数据文件：\`${metaFile}\`\n` +
-                     `图标：\`${meta.icon || '（未提取到）'}\`\n\n' +
+                     `图标：\`${meta.icon || '（未提取到）'}\`\n\n` +
                      'GStore 用户后续更新数据库即可获取这些信息。';
               label = 'metadata-done';
             } else {
