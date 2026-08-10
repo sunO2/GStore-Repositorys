@@ -1,0 +1,12 @@
+{
+  "owner": "GtxFury",
+  "repo": "FlyClash-Android",
+  "packageName": "com.gtxfury.flyclash.smart",
+  "appName": "FlyClash",
+  "versionName": "0.2.1.8.Smart",
+  "versionCode": "2018",
+  "icon": "",
+  "sourceTag": "v0.2.1.8-Alpha-Smart",
+  "sourceApk": "flyclash-0.2.1.8-pbSmart-arm64-v8a-release.apk",
+  "generatedAt": "2026-08-02T05:35:58Z"
+}
