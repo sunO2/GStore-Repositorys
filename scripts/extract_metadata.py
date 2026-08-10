@@ -93,19 +93,28 @@ def pick_apk_asset(assets, keyword):
 
 
 def png_size(data):
-    """解析 PNG IHDR 获取宽高，非 PNG 返回 None。"""
-    if not data.startswith(b"\x89PNG\r\n\x1a\n"):
-        return None
-    if len(data) < 24:
-        return None
-    width, height = struct.unpack(">II", data[16:24])
-    return (width, height)
+    """解析 PNG/WebP 图像尺寸，非图像返回 None。"""
+    if data.startswith(b"\x89PNG\r\n\x1a\n"):
+        if len(data) < 24:
+            return None
+        width, height = struct.unpack(">II", data[16:24])
+        return (width, height)
+    # WebP：RIFF....WEBP
+    if data.startswith(b"RIFF") and data[8:12] == b"WEBP":
+        try:
+            from PIL import Image
+            import io
+            img = Image.open(io.BytesIO(data))
+            return img.size
+        except Exception:
+            return None
+    return None
 
 
 # ==================== 自适应图标渲染（VectorDrawable → SVG → PNG） ====================
 
 def _resolve_color(a, rid):
-    """从 resources.arsc 解析颜色资源（ARGB int）"""
+    """从 resources.arsc 解析颜色资源（ARGB8=0x1C / RGB8=0x1D）"""
     try:
         from androguard.core.axml import ARSCResTableEntry
         res = a.get_android_resources()
@@ -115,9 +124,12 @@ def _resolve_color(a, rid):
                 if raw is None:
                     raw = a.zip.read("resources.arsc")
                 dtype = struct.unpack_from("<B", raw, e.start + 11)[0]
-                if dtype == 0x1C:
+                if dtype in (0x1C, 0x1D):  # TYPE_INT_COLOR_ARGB8 / RGB8
                     v = struct.unpack_from("<I", raw, e.start + 12)[0]
-                    al, r, g, b = (v >> 24) & 0xFF, (v >> 16) & 0xFF, (v >> 8) & 0xFF, v & 0xFF
+                    if dtype == 0x1C:
+                        al, r, g, b = (v >> 24) & 0xFF, (v >> 16) & 0xFF, (v >> 8) & 0xFF, v & 0xFF
+                    else:
+                        al, r, g, b = 0xFF, (v >> 16) & 0xFF, (v >> 8) & 0xFF, v & 0xFF
                     return "#%02X%02X%02X%02X" % (r, g, b, al)
     except Exception:
         pass
@@ -301,9 +313,19 @@ def render_adaptive_icon(a, icon_path, dest, size=512):
     scale = size / 108 * 0.72
     offset = (size - 108 * scale) / 2
 
-    if fg_file.endswith(".png"):
+    if fg_file.endswith((".png", ".webp")):
         import base64
-        uri = "data:image/png;base64," + base64.b64encode(a.get_file(fg_file)).decode()
+        import io
+        try:
+            from PIL import Image
+            img = Image.open(io.BytesIO(a.get_file(fg_file)))
+            # WebP 转 PNG（cairosvg 的 image 标签对 webp data URI 支持不稳）
+            buf = io.BytesIO()
+            img.convert("RGBA").save(buf, format="PNG")
+            data = buf.getvalue()
+        except Exception:
+            data = a.get_file(fg_file)
+        uri = "data:image/png;base64," + base64.b64encode(data).decode()
         fg_defs, fg_content = "", '<image href="%s" width="%d" height="%d"/>' % (uri, size, size)
     else:
         fg_xml = AXMLPrinter(a.get_file(fg_file)).get_xml().decode("utf-8", errors="replace")
@@ -335,7 +357,7 @@ def extract_icon(a, icon_path, dest):
     except Exception:
         pass
     for path in a.get_files():
-        if re.search(r"(ic_launcher|app_icon).*\.png$", path, re.IGNORECASE):
+        if re.search(r"(ic_launcher|app_icon).*\.(png|webp)$", path, re.IGNORECASE):
             candidates.append(path)
         # Compose Multiplatform 应用：图标通常打包在 composeResources 下（资源名被混淆，
         # 但 assets 目录结构保留，常见如 ic_keyguard.png / ic_launcher.png）
@@ -362,7 +384,7 @@ def extract_icon(a, icon_path, dest):
             log(f"候选图标: {path} {size[0]}x{size[1]}")
 
     if best is None:
-        # 无可用 PNG：尝试自适应图标矢量渲染（资源混淆 APK 的兜底方案）
+        # 无可用 PNG/WebP：尝试自适应图标矢量渲染（资源混淆 APK 的兜底方案）
         log("未找到有效 PNG 图标，尝试自适应图标渲染")
         for path in dict.fromkeys(candidates):
             if path and path.endswith(".xml"):
@@ -388,8 +410,21 @@ def extract_icon(a, icon_path, dest):
         return None
 
     os.makedirs(os.path.dirname(dest), exist_ok=True)
+    data = best[1]
+    # WebP 需转换为 PNG（dest 固定为 .png）
+    if data.startswith(b"RIFF") and data[8:12] == b"WEBP":
+        try:
+            from PIL import Image
+            import io
+            img = Image.open(io.BytesIO(data))
+            buf = io.BytesIO()
+            img.convert("RGBA").save(buf, format="PNG")
+            data = buf.getvalue()
+            log(f"WebP 已转为 PNG: {best[0]}")
+        except Exception as e:
+            log(f"WebP 转换失败: {e}")
     with open(dest, "wb") as f:
-        f.write(best[1])
+        f.write(data)
     log(f"图标已写入: {dest} ({best_size[0]}x{best_size[1]})")
     return dest
 

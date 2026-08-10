@@ -85,7 +85,7 @@ jobs:
 
       - name: Install androguard
         if: steps.parse.outputs.invalid != 'yes'
-        run: pip install androguard cairosvg
+        run: pip install androguard cairosvg pillow
 
       - name: 下载 APK 并提取元数据
         id: extract
