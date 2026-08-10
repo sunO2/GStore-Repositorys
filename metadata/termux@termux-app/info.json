@@ -3,10 +3,10 @@
   "repo": "termux-app",
   "packageName": "com.termux",
   "appName": "Termux",
-  "versionName": "0.119.0-beta.3",
-  "versionCode": "1022",
+  "versionName": "0.118.0",
+  "versionCode": "118",
   "icon": "metadata/termux@termux-app/icon.png",
-  "sourceTag": "v0.119.0-beta.3",
-  "sourceApk": "termux-app_v0.119.0-beta.3+apt-android-5-github-debug_arm64-v8a.apk",
-  "generatedAt": "2025-05-22T22:48:54Z"
+  "sourceTag": "local",
+  "sourceApk": "termux.apk",
+  "generatedAt": ""
 }
