@@ -116,7 +116,11 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "$METADATA_FILE" "$ICON_FILE"
+          git add "$METADATA_FILE"
+          # 图标可能缺失（纯矢量图标未渲染），存在才提交
+          if [ -f "$ICON_FILE" ]; then
+            git add "$ICON_FILE"
+          fi
           git commit -m "metadata: ${OWNER}/${REPO} 自动提取"
 
           # 并发冲突处理：rebase 后重试 push

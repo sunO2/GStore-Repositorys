@@ -107,6 +107,13 @@ def extract_icon(a, icon_path, dest):
     for path in a.get_files():
         if re.search(r"(ic_launcher|app_icon).*\.png$", path, re.IGNORECASE):
             candidates.append(path)
+        # Compose Multiplatform 应用：图标通常打包在 composeResources 下（资源名被混淆，
+        # 但 assets 目录结构保留，常见如 ic_keyguard.png / ic_launcher.png）
+        if (
+            re.search(r"^assets/composeResources/", path, re.IGNORECASE)
+            and re.search(r"(/|^)ic_.*\.png$", path, re.IGNORECASE)
+        ):
+            candidates.append(path)
 
     best = None
     best_size = (0, 0)
@@ -171,35 +178,46 @@ def main():
 
     apk_path = None
     try:
-        log(f"获取仓库信息: {owner}/{repo}")
-        repo_info = api_get(f"/repos/{owner}/{repo}")
-        if not repo_info.get("permissions", {}).get("pull", True) and repo_info.get("private"):
-            raise RuntimeError("仓库为私有仓库，无法访问")
+        local_apk = os.environ.get("GSTORE_LOCAL_APK")
+        if local_apk:
+            # 本地调试钩子：跳过 GitHub API 与下载，直接解析本地 APK
+            log(f"使用本地 APK: {local_apk}")
+            apk_path = local_apk
+            tag = "local"
+            asset_name = os.path.basename(local_apk)
+            published_at = ""
+        else:
+            log(f"获取仓库信息: {owner}/{repo}")
+            repo_info = api_get(f"/repos/{owner}/{repo}")
+            if not repo_info.get("permissions", {}).get("pull", True) and repo_info.get("private"):
+                raise RuntimeError("仓库为私有仓库，无法访问")
 
-        log(f"获取最新 release")
-        try:
-            releases = api_get(f"/repos/{owner}/{repo}/releases?per_page=1")
-        except RuntimeError as e:
-            if "404" in str(e):
-                raise RuntimeError("仓库没有 release")
-            raise
-        if not releases:
-            raise RuntimeError("仓库没有任何 release")
+            log(f"获取最新 release")
+            try:
+                releases = api_get(f"/repos/{owner}/{repo}/releases?per_page=1")
+            except RuntimeError as e:
+                if "404" in str(e):
+                    raise RuntimeError("仓库没有 release")
+                raise
+            if not releases:
+                raise RuntimeError("仓库没有任何 release")
 
-        latest = releases[0]
-        tag = latest.get("tag_name") or latest.get("name") or ""
-        log(f"最新 release 标签: {tag}")
+            latest = releases[0]
+            tag = latest.get("tag_name") or latest.get("name") or ""
+            log(f"最新 release 标签: {tag}")
 
-        asset = pick_apk_asset(latest.get("assets") or [], keyword)
-        url = asset.get("browser_download_url") or asset.get("url") or ""
-        if not url:
-            raise RuntimeError("release 资产缺少下载地址")
-        if not url.startswith("https://github.com/") and not url.startswith(f"{API}/"):
-            raise RuntimeError(f"拒绝非 GitHub 来源的下载地址: {url}")
+            asset = pick_apk_asset(latest.get("assets") or [], keyword)
+            url = asset.get("browser_download_url") or asset.get("url") or ""
+            if not url:
+                raise RuntimeError("release 资产缺少下载地址")
+            if not url.startswith("https://github.com/") and not url.startswith(f"{API}/"):
+                raise RuntimeError(f"拒绝非 GitHub 来源的下载地址: {url}")
 
-        apk_path = f"/tmp/{owner}@{repo}.apk"
-        size = download(url, apk_path)
-        log(f"APK 下载完成: {asset['name']} ({size} 字节)")
+            apk_path = f"/tmp/{owner}@{repo}.apk"
+            size = download(url, apk_path)
+            log(f"APK 下载完成: {asset['name']} ({size} 字节)")
+            asset_name = asset["name"]
+            published_at = latest.get("published_at") or ""
 
         a = APK(apk_path)
         package_name = a.get_package()
@@ -219,8 +237,8 @@ def main():
             "versionCode": version_code if version_code is not None else "",
             "icon": icon_path or "",
             "sourceTag": tag,
-            "sourceApk": asset["name"],
-            "generatedAt": latest.get("published_at") or "",
+            "sourceApk": asset_name,
+            "generatedAt": published_at,
         }
         with open(meta_file, "w", encoding="utf-8") as f:
             for k, v in data.items():
