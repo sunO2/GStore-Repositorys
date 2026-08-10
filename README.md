@@ -29,23 +29,27 @@ app 仓库配置文件
 ### 规则说明
 
 - 标题必须以 `[app-metadata]` 开头（模板自动生成），否则不会被处理
-- 数据写入 `metadata/{owner}@{repo}.yaml`，图标写入 `metadata/icons/{owner}@{repo}.png`
+- 每个项目一个目录：`metadata/{owner}@{repo}/`，内含 `info.json`（元数据）与 `icon.png`（图标）
 - 仅处理最新 release；仅接受 GitHub release 中的 APK（<200MB）
 - 处理结果会在 issue 中评论（成功：提取的信息；失败：原因）
 
 ### 数据格式示例
 
-```yaml
-owner: termux
-repo: termux-app
-packageName: com.termux
-appName: Termux
-versionName: 0.119.0-beta.3
-versionCode: 1022
-icon: metadata/icons/termux@termux-app.png
-sourceTag: v0.119.0-beta.3
-sourceApk: termux-app_v0.119.0-beta.3+apt-android-5-github-debug_arm64-v8a.apk
-generatedAt: "2025-05-22T22:48:54Z"
+`metadata/termux@termux-app/info.json`：
+
+```json
+{
+  "owner": "termux",
+  "repo": "termux-app",
+  "packageName": "com.termux",
+  "appName": "Termux",
+  "versionName": "0.119.0-beta.3",
+  "versionCode": "1022",
+  "icon": "metadata/termux@termux-app/icon.png",
+  "sourceTag": "v0.119.0-beta.3",
+  "sourceApk": "termux-app_v0.119.0-beta.3+apt-android-5-github-debug_arm64-v8a.apk",
+  "generatedAt": "2025-05-22T22:48:54Z"
+}
 ```
 
 > 该目录数据暂未合入 `apps.db`，后续版本会合并进数据库更新链路。

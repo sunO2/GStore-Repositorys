@@ -104,8 +104,8 @@ jobs:
           REPO: ${{ steps.parse.outputs.repo }}
         run: |
           set -euo pipefail
-          METADATA_FILE="metadata/${OWNER}@${REPO}.yaml"
-          ICON_FILE="metadata/icons/${OWNER}@${REPO}.png"
+          METADATA_FILE="metadata/${OWNER}@${REPO}/info.json"
+          ICON_FILE="metadata/${OWNER}@${REPO}/icon.png"
 
           echo "pushed=no" >> $GITHUB_OUTPUT
 
@@ -151,17 +151,13 @@ jobs:
             const owner = process.env.OWNER;
             const repo = process.env.REPO;
             const fs = require('fs');
-            const metaFile = `metadata/${owner}@${repo}.yaml`;
-            const failFile = `metadata/${owner}@${repo}.failed`;
+            const metaFile = `metadata/${owner}@${repo}/info.json`;
+            const failFile = `metadata/${owner}@${repo}/.failed`;
 
             let body;
             let label;
             if (fs.existsSync(metaFile)) {
-              const meta = {};
-              for (const line of fs.readFileSync(metaFile, 'utf8').split('\n')) {
-                const idx = line.indexOf(':');
-                if (idx > 0) meta[line.slice(0, idx).trim()] = line.slice(idx + 1).trim().replace(/^"|"$/g, '');
-              }
+              const meta = JSON.parse(fs.readFileSync(metaFile, 'utf8'));
               body = '## ✅ 元数据提取完成\n\n' +
                      '| 字段 | 值 |\n|---|---|\n' +
                      `| 应用名 | ${meta.appName || '-'} |\n` +

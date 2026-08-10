@@ -8,8 +8,8 @@
     GITHUB_TOKEN    GitHub Token（Actions 中为自动提供的 token，用于获取 release）
 
 输出:
-    metadata/<owner>@<repo>.yaml          元数据（扁平 key-value）
-    metadata/icons/<owner>@<repo>.png     应用图标（自适应图标取最大可用 PNG）
+    metadata/<owner>@<repo>/info.json   元数据（JSON）
+    metadata/<owner>@<repo>/icon.png    应用图标（自适应图标取最大可用 PNG）
 
 退出码:
     0 成功（含"无可用 APK 元数据"的明确失败，已写原因文件）
@@ -142,15 +142,6 @@ def extract_icon(a, icon_path, dest):
     return dest
 
 
-def yaml_scalar(value):
-    if value is None:
-        return ""
-    value = str(value)
-    if re.search(r"[:#\n\"']", value) or value != value.strip():
-        return json.dumps(value, ensure_ascii=False)
-    return value
-
-
 def main():
     if len(sys.argv) < 3:
         print(__doc__)
@@ -167,12 +158,13 @@ def main():
     # 关闭 androguard 的 DEBUG 日志噪音
     logging.getLogger("androguard").setLevel(logging.ERROR)
 
-    os.makedirs("metadata/icons", exist_ok=True)
-    meta_file = f"metadata/{owner}@{repo}.yaml"
-    icon_file = f"metadata/icons/{owner}@{repo}.png"
+    project_dir = f"metadata/{owner}@{repo}"
+    os.makedirs(project_dir, exist_ok=True)
+    meta_file = f"{project_dir}/info.json"
+    icon_file = f"{project_dir}/icon.png"
 
     # 清理旧失败标记
-    fail_file = f"metadata/{owner}@{repo}.failed"
+    fail_file = f"{project_dir}/.failed"
     if os.path.exists(fail_file):
         os.remove(fail_file)
 
@@ -241,8 +233,7 @@ def main():
             "generatedAt": published_at,
         }
         with open(meta_file, "w", encoding="utf-8") as f:
-            for k, v in data.items():
-                f.write(f"{k}: {yaml_scalar(v)}\n")
+            json.dump(data, f, ensure_ascii=False, indent=2)
         log(f"元数据已写入: {meta_file}")
         print(f"RESULT=ok", flush=True)
         return 0
