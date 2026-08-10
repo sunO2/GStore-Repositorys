@@ -1,0 +1,35 @@
+name: 提交应用元数据 (App Metadata)
+description: 提交一个 GitHub 仓库，由 Actions 自动提取其最新 release APK 的应用名、包名、图标、版本信息，存入 metadata/ 目录
+title: "[app-metadata] owner/repo"
+labels: ["app-metadata"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 说明
+
+        - 提交后 GitHub Actions 会自动处理：下载最新 release 中的 APK → 提取元数据（应用名 / 包名 / 图标 / versionName / versionCode）→ 写入 `metadata/` 目录 → 完成后关闭本 issue。
+        - 请勿修改标题格式，标题必须以 `[app-metadata]` 开头，否则不会被处理。
+        - 要求：目标仓库的 GitHub **release 中必须直接附带 .apk 资产**（不附带的不会处理）。
+  - type: input
+    id: repo_url
+    attributes:
+      label: 仓库地址
+      description: 发布 APK 的 GitHub 仓库地址
+      placeholder: https://github.com/termux/termux-app
+    validations:
+      required: true
+  - type: input
+    id: asset_keyword
+    attributes:
+      label: APK 资产关键词（可选）
+      description: 用于从 release 资产中筛选 APK 文件名，例如 arm64-v8a / universal / release；留空则取第一个 .apk 资产
+      placeholder: arm64-v8a
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: 确认
+      description: 请勾选以下确认项
+      options:
+        - label: 该仓库的最新 release 中包含 .apk 文件
+          required: true

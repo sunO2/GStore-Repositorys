@@ -1,0 +1,197 @@
+name: App Metadata Extractor
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    # 第一道校验：标题必须以 [app-metadata] 开头
+    if: startsWith(github.event.issue.title, '[app-metadata]')
+    steps:
+      - name: 校验并解析 issue 内容
+        id: parse
+        shell: bash
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          set -euo pipefail
+          echo "invalid=no" >> $GITHUB_OUTPUT
+
+          # 第二道校验：从 body 提取 GitHub 仓库 URL
+          URL=$(echo "$ISSUE_BODY" | grep -oP 'https://github\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+' | head -n 1 || true)
+          if [ -z "$URL" ]; then
+            echo "invalid=yes" >> $GITHUB_OUTPUT
+            echo "reason=未在 issue 内容中解析到有效的 GitHub 仓库地址" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          REPO_FULL=${URL#https://github.com/}
+          OWNER=$(echo "$REPO_FULL" | cut -d/ -f1)
+          REPO=$(echo "$REPO_FULL" | cut -d/ -f2)
+          echo "owner=$OWNER" >> $GITHUB_OUTPUT
+          echo "repo=$REPO" >> $GITHUB_OUTPUT
+
+          # 提取可选的关键词（表单"APK 资产关键词"字段后的行）
+          KEYWORD=$(echo "$ISSUE_BODY" | grep -A2 'APK 资产关键词' | tail -n 1 | tr -d '[:space:]' || true)
+          if [ -n "$KEYWORD" ] && [ "$KEYWORD" != "-" ]; then
+            echo "keyword=$KEYWORD" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 格式校验失败处理
+        if: steps.parse.outputs.invalid == 'yes'
+        uses: actions/github-script@v7
+        env:
+          REASON: ${{ steps.parse.outputs.reason }}
+        with:
+          script: |
+            const reason = process.env.REASON;
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: ['invalid'],
+            });
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: '## ❌ 格式校验失败\n\n' +
+                    reason + '。\n\n' +
+                    '请使用模板重新提交 issue：标题必须以 `[app-metadata]` 开头，' +
+                    '并在"仓库地址"中填写格式为 `https://github.com/owner/repo` 的地址。',
+            });
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: 'closed',
+            });
+
+      - name: Checkout
+        if: steps.parse.outputs.invalid != 'yes'
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        if: steps.parse.outputs.invalid != 'yes'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install androguard
+        if: steps.parse.outputs.invalid != 'yes'
+        run: pip install androguard
+
+      - name: 下载 APK 并提取元数据
+        id: extract
+        if: steps.parse.outputs.invalid != 'yes'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python scripts/extract_metadata.py "${{ steps.parse.outputs.owner }}" "${{ steps.parse.outputs.repo }}" "${{ steps.parse.outputs.keyword }}"
+
+      - name: 提交元数据文件
+        id: commit
+        if: steps.parse.outputs.invalid != 'yes' && steps.extract.outcome == 'success'
+        shell: bash
+        env:
+          OWNER: ${{ steps.parse.outputs.owner }}
+          REPO: ${{ steps.parse.outputs.repo }}
+        run: |
+          set -euo pipefail
+          METADATA_FILE="metadata/${OWNER}@${REPO}.yaml"
+          ICON_FILE="metadata/icons/${OWNER}@${REPO}.png"
+
+          echo "pushed=no" >> $GITHUB_OUTPUT
+
+          # 提取失败（存在 .failed 标记）或未产生元数据文件则跳过提交
+          if [ ! -f "$METADATA_FILE" ]; then
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$METADATA_FILE" "$ICON_FILE"
+          git commit -m "metadata: ${OWNER}/${REPO} 自动提取"
+
+          # 并发冲突处理：rebase 后重试 push
+          for i in 1 2 3; do
+            if git push origin main 2>/dev/null; then
+              echo "pushed=yes" >> $GITHUB_OUTPUT
+              exit 0
+            fi
+            git pull --rebase origin main
+          done
+
+      - name: 评论处理结果并关闭 issue
+        if: always() && steps.parse.outputs.invalid != 'yes'
+        uses: actions/github-script@v7
+        env:
+          OWNER: ${{ steps.parse.outputs.owner }}
+          REPO: ${{ steps.parse.outputs.repo }}
+          PUSHED: ${{ steps.commit.outputs.pushed }}
+        with:
+          script: |
+            const owner = process.env.OWNER;
+            const repo = process.env.REPO;
+            const fs = require('fs');
+            const metaFile = `metadata/${owner}@${repo}.yaml`;
+            const failFile = `metadata/${owner}@${repo}.failed`;
+
+            let body;
+            let label;
+            if (fs.existsSync(metaFile)) {
+              const meta = {};
+              for (const line of fs.readFileSync(metaFile, 'utf8').split('\n')) {
+                const idx = line.indexOf(':');
+                if (idx > 0) meta[line.slice(0, idx).trim()] = line.slice(idx + 1).trim().replace(/^"|"$/g, '');
+              }
+              body = '## ✅ 元数据提取完成\n\n' +
+                     '| 字段 | 值 |\n|---|---|\n' +
+                     `| 应用名 | ${meta.appName || '-'} |\n` +
+                     `| 包名 | ${meta.packageName || '-'} |\n` +
+                     `| 版本名 | ${meta.versionName || '-'} |\n` +
+                     `| 版本号 | ${meta.versionCode || '-'} |\n` +
+                     `| Release 标签 | ${meta.sourceTag || '-'} |\n\n` +
+                     `元数据文件：\`${metaFile}\`\n` +
+                     `图标：\`${meta.icon || '（未提取到）'}\`\n\n' +
+                     'GStore 用户后续更新数据库即可获取这些信息。';
+              label = 'metadata-done';
+            } else {
+              let reason = '未能从该仓库的 release 中提取到有效 APK 元数据。';
+              if (fs.existsSync(failFile)) {
+                reason = fs.readFileSync(failFile, 'utf8');
+              }
+              body = '## ❌ 提取失败\n\n' +
+                     '> ' + reason.replace(/\n/g, '\n> ') + '\n\n' +
+                     '常见原因：\n' +
+                     '- 最新 release 中没有 `.apk` 资产\n' +
+                     '- APK 下载失败或超过大小限制（200MB）\n' +
+                     '- 目标仓库不存在或为私有仓库\n\n' +
+                     '请修正后重新提交 issue。';
+              label = 'metadata-failed';
+            }
+
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: [label],
+            });
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: 'closed',
+            });
