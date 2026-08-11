@@ -130,7 +130,8 @@ def _resolve_color(a, rid):
                         al, r, g, b = (v >> 24) & 0xFF, (v >> 16) & 0xFF, (v >> 8) & 0xFF, v & 0xFF
                     else:
                         al, r, g, b = 0xFF, (v >> 16) & 0xFF, (v >> 8) & 0xFF, v & 0xFF
-                    return "#%02X%02X%02X%02X" % (r, g, b, al)
+                    # Android ARGB 格式 #AARRGGBB（与 path fillColor 一致，供 _argb_to_css 解析）
+                    return "#%02X%02X%02X%02X" % (al, r, g, b)
     except Exception:
         pass
     return None
@@ -248,8 +249,21 @@ def _vector_to_content(a, xml_text, gid_counter):
     def walk(elem):
         tag = elem.tag.split("}")[-1]
         if tag == "group":
-            out.append("<g%s>" % _group_transform(elem))
+            # 收集 clip-path 子元素 → defs 定义 + 本组 clip-path 引用
+            clip_ref = ""
+            children = []
             for ch in elem:
+                if ch.tag.split("}")[-1] == "clip-path":
+                    cp_id = "cp%d" % (len(defs) + 1)
+                    for cp in ch:
+                        cp_d = aget(cp, "pathData")
+                        if cp_d:
+                            defs.append('<clipPath id="%s"><path d="%s"/></clipPath>' % (cp_id, cp_d))
+                            clip_ref = ' clip-path="url(#%s)"' % cp_id
+                else:
+                    children.append(ch)
+            out.append("<g%s%s>" % (_group_transform(elem), clip_ref))
+            for ch in children:
                 walk(ch)
             out.append("</g>")
         elif tag == "path":
@@ -278,19 +292,123 @@ def _vector_to_content(a, xml_text, gid_counter):
             if ft in ("evenOdd", "1"):
                 attrs.append('fill-rule="evenodd"')
             out.append("<path " + " ".join(attrs) + "/>")
-        elif tag == "clip-path":
-            out.append("<clipPath>")
-            for ch in elem:
-                walk(ch)
-            out.append("</clipPath>")
 
+    # 遍历顶层 children 生成内容
     for ch in root:
         walk(ch)
-    return "".join(defs), "".join(out)
+    body = "".join(out)
+    # vector 根 alpha（透明度）
+    alpha = aget(root, "alpha")
+    if alpha is not None and float(alpha) < 1:
+        body = '<g opacity="%s">%s</g>' % (alpha, body)
+    return "".join(defs), body
+
+
+def _parse_shape(a, xml_text, size, gid_counter):
+    """<shape> drawable → SVG 元素（solid/渐变 rect/ellipse + 圆角）
+    借鉴 APIE 的 gradient-shape 模型；渐变坐标按 shape 尺寸百分比（0-100）映射"""
+    root = ET.fromstring(xml_text)
+    shape = aget(root, "shape") or "rectangle"
+    radius = 0.0
+    stops: list = []  # (offset, css)
+    grad_type = None
+    gx1 = gy1 = gx2 = gy2 = None
+    for ch in root:
+        tag = ch.tag.split("}")[-1]
+        if tag == "solid":
+            col = aget(ch, "color")
+            if col:
+                stops = [(None, _argb_to_css(col))]
+        elif tag == "gradient":
+            grad_type = aget(ch, "type") or "0"
+            gx1, gy1 = aget(ch, "startX"), aget(ch, "startY")
+            gx2, gy2 = aget(ch, "endX"), aget(ch, "endY")
+            for item in ch:
+                if item.tag.split("}")[-1] == "item":
+                    off = aget(item, "offset")
+                    offset = float(off) if off else None
+                    stops.append((offset, _argb_to_css(aget(item, "color") or "#000000")))
+        elif tag == "corners":
+            radius = float(aget(ch, "radius") or "0")
+    defs = []
+    fill_attr = 'fill="#FFFFFF"'
+    if grad_type == "0" and len(stops) >= 2:
+        gid_counter[0] += 1
+        gid = "g%d" % gid_counter[0]
+        n = len(stops)
+        stop_xml = ""
+        for idx, (off, col) in enumerate(stops):
+            o = off if off is not None else (idx / (n - 1) if n > 1 else 0)
+            stop_xml += '<stop offset="%.2f" stop-color="%s"/>' % (o, col)
+        x1 = float(gx1 or 0) / 100 * size
+        y1 = float(gy1 or 0) / 100 * size
+        x2 = float(gx2 or 100) / 100 * size
+        y2 = float(gy2 or 0) / 100 * size
+        defs.append('<linearGradient id="%s" gradientUnits="userSpaceOnUse" x1="%.2f" y1="%.2f" x2="%.2f" y2="%.2f">%s</linearGradient>'
+                    % (gid, x1, y1, x2, y2, stop_xml))
+        fill_attr = 'fill="url(#%s)"' % gid
+    elif len(stops) >= 2:
+        # radial（Android shape 用 centerX/centerY/gradientRadius，默认 50%）
+        gid_counter[0] += 1
+        gid = "g%d" % gid_counter[0]
+        n = len(stops)
+        stop_xml = ""
+        for idx, (off, col) in enumerate(stops):
+            o = off if off is not None else (idx / (n - 1) if n > 1 else 0)
+            stop_xml += '<stop offset="%.2f" stop-color="%s"/>' % (o, col)
+        defs.append('<radialGradient id="%s" gradientUnits="userSpaceOnUse" cx="%.2f" cy="%.2f" r="%.2f">%s</radialGradient>'
+                    % (gid, size / 2, size / 2, size / 2, stop_xml))
+        fill_attr = 'fill="url(#%s)"' % gid
+    elif stops:
+        fill_attr = 'fill="%s"' % stops[0][1]
+
+    if shape == "oval":
+        elem = '<ellipse cx="%d" cy="%d" rx="%d" ry="%d" %s/>' % (size / 2, size / 2, size / 2, size / 2, fill_attr)
+    else:
+        rx = ' rx="%.2f"' % radius if radius > 0 else ""
+        elem = '<rect width="%d" height="%d"%s %s/>' % (size, size, rx, fill_attr)
+    return "".join(defs), elem
+
+
+def _resolve_background(a, rid, size, gid_counter):
+    """解析 adaptive icon 背景引用 → (渐变 defs, SVG 背景元素)
+    支持：color / <shape>（solid/渐变/圆角/oval）/ vector / PNG / WebP"""
+    from androguard.core.axml import AXMLPrinter
+    c = _resolve_color(a, rid)
+    if c:
+        return "", '<rect width="%d" height="%d" fill="%s"/>' % (size, size, _argb_to_css(c))
+    f = _resolve_res_file(a, rid)
+    if not f:
+        return "", '<rect width="%d" height="%d" fill="#FFFFFF"/>' % (size, size)
+    if f.endswith((".png", ".webp")):
+        import base64
+        import io
+        try:
+            from PIL import Image
+            img = Image.open(io.BytesIO(a.get_file(f)))
+            buf = io.BytesIO()
+            img.convert("RGBA").save(buf, format="PNG")
+            data = buf.getvalue()
+        except Exception:
+            data = a.get_file(f)
+        uri = "data:image/png;base64," + base64.b64encode(data).decode()
+        return "", '<image href="%s" width="%d" height="%d" preserveAspectRatio="xMidYMid slice"/>' % (uri, size, size)
+    try:
+        xml = AXMLPrinter(a.get_file(f)).get_xml().decode("utf-8", errors="replace")
+        m_tag = re.search(r"<(\w+)[\s>]", xml)
+        tag = m_tag.group(1) if m_tag else ""
+        if tag == "shape":
+            return _parse_shape(a, xml, size, gid_counter)
+        if tag == "vector":
+            defs, content = _vector_to_content(a, xml, gid_counter)
+            return defs, content
+    except Exception:
+        pass
+    return "", '<rect width="%d" height="%d" fill="#FFFFFF"/>' % (size, size)
 
 
 def render_adaptive_icon(a, icon_path, dest, size=512):
-    """渲染自适应图标：背景色/图 + 前景矢量/PNG 合成"""
+    """渲染自适应图标：背景（色/shape/图/矢量）+ 前景（矢量/PNG）合成"""
     from androguard.core.axml import AXMLPrinter
     xml = AXMLPrinter(a.get_file(icon_path)).get_xml().decode("utf-8", errors="replace")
     m_bg = re.search(r'<background[^>]*android:drawable="(@[0-9A-Fa-f]+)"', xml)
@@ -298,10 +416,15 @@ def render_adaptive_icon(a, icon_path, dest, size=512):
     if not m_fg:
         return None
     fg_rid = int(m_fg.group(1)[1:], 16)
-    bg_color = _resolve_color(a, int(m_bg.group(1)[1:], 16)) if m_bg else None
     fg_file = _resolve_res_file(a, fg_rid)
     if not fg_file:
         return None
+
+    gid = [0]
+    if m_bg:
+        bg_defs, bg_content = _resolve_background(a, int(m_bg.group(1)[1:], 16), size, gid)
+    else:
+        bg_defs, bg_content = "", '<rect width="%d" height="%d" fill="#FFFFFF"/>' % (size, size)
 
     scale = size / 108 * 0.72
     offset = (size - 108 * scale) / 2
@@ -322,16 +445,14 @@ def render_adaptive_icon(a, icon_path, dest, size=512):
         fg_defs, fg_content = "", '<image href="%s" width="%d" height="%d"/>' % (uri, size, size)
     else:
         fg_xml = AXMLPrinter(a.get_file(fg_file)).get_xml().decode("utf-8", errors="replace")
-        fg_defs, fg_content = _vector_to_content(a, fg_xml, [0])
+        fg_defs, fg_content = _vector_to_content(a, fg_xml, gid)
 
-    bg_rect = '<rect width="%d" height="%d" fill="%s"/>' % (size, size, bg_color or "#FFFFFF")
-    # 前景内容（108 viewport）整体缩放到安全区居中；内部 group 变换由渲染器处理
     combined = (
         '<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d">'
-        "%s<defs>%s</defs>"
+        "<defs>%s%s</defs>%s"
         '<g transform="translate(%s,%s) scale(%s)">%s</g>'
         "</svg>"
-    ) % (size, size, bg_rect, fg_defs, offset, offset, scale, fg_content)
+    ) % (size, size, bg_defs, fg_defs, bg_content, offset, offset, scale, fg_content)
 
     import cairosvg
     cairosvg.svg2png(bytestring=combined.encode(), write_to=dest, output_width=size, output_height=size)
