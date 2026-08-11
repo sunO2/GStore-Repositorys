@@ -121,7 +121,7 @@ jobs:
           if [ -f "$ICON_FILE" ]; then
             git add "$ICON_FILE"
           fi
-          git commit -m "metadata: ${OWNER}/${REPO} 自动提取"
+          git commit -m "metadata: ${OWNER}/${REPO} 自动提取" || echo "无变更，跳过提交（metadata 已是最新）"
 
           # 并发冲突处理：rebase 后重试 push
           for i in 1 2 3; do
