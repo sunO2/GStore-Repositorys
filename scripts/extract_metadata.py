@@ -114,7 +114,28 @@ def png_size(data):
 # ==================== 自适应图标渲染（VectorDrawable → SVG → PNG） ====================
 
 def _resolve_color(a, rid):
-    """从 resources.arsc 解析颜色资源（ARGB8=0x1C / RGB8=0x1D）"""
+    """从 resources.arsc 解析颜色资源（ARGB8=0x1C / RGB8=0x1D）
+    系统颜色（android 包 0x01）直接查映射表"""
+    # Android 系统颜色（android.R.color，包 ID 0x01）
+    _ANDROID_COLORS = {
+        0x0106000B: "#FF000000",  # black
+        0x0106000C: "#FFFFFFFF",  # white
+        0x0106000D: "#00000000",  # transparent
+        0x0106000E: "#FF444444",  # darker_gray
+        0x01060010: "#FFAAAAAA",  # lighter_gray
+        0x01060012: "#FF0000FF",  # holo_blue_bright
+        0x01060013: "#FF0099CC",  # holo_blue_dark
+        0x01060014: "#FF33B5E5",  # holo_blue_light
+        0x01060015: "#FFFF8800",  # holo_orange_dark
+        0x01060016: "#FFFFBB33",  # holo_orange_light
+        0x01060017: "#FF669900",  # holo_green_dark
+        0x01060018: "#FF99CC00",  # holo_green_light
+        0x01060019: "#FFCC0000",  # holo_red_dark
+        0x0106001A: "#FFFF4444",  # holo_red_light
+        0x0106001B: "#FF9933CC",  # holo_purple
+    }
+    if rid in _ANDROID_COLORS:
+        return _ANDROID_COLORS[rid]
     try:
         from androguard.core.axml import ARSCResTableEntry
         res = a.get_android_resources()
@@ -297,6 +318,12 @@ def _vector_to_content(a, xml_text, gid_counter):
     for ch in root:
         walk(ch)
     body = "".join(out)
+    # viewport 归一化：非 108 viewport 的 vector（如 403x403）先缩放到 108 画布，
+    # 再被外层 adaptive 缩放（否则内容超出画布导致空白）
+    vw = float(aget(root, "viewportWidth") or "108")
+    vh = float(aget(root, "viewportHeight") or "108")
+    if vw != 108 or vh != 108:
+        body = '<g transform="scale(%.6f,%.6f)">%s</g>' % (108.0 / vw, 108.0 / vh, body)
     # vector 根 alpha（透明度）
     alpha = aget(root, "alpha")
     if alpha is not None and float(alpha) < 1:
@@ -426,7 +453,11 @@ def render_adaptive_icon(a, icon_path, dest, size=512):
     else:
         bg_defs, bg_content = "", '<rect width="%d" height="%d" fill="#FFFFFF"/>' % (size, size)
 
-    scale = size / 108 * 0.72
+    # 前景缩放（借鉴 ApkInfoTool 规范）：画布放大居中、超出部分被裁剪
+    # - vector 前景 1.28x（108 viewport 内容按官方模板占中央 ~66dp 安全区）
+    # - bitmap 前景 1.60x（PNG/WebP 资源通常内容占画布比例更小）
+    fg_scale = 1.60 if fg_file.endswith((".png", ".webp")) else 1.28
+    scale = size / 108 * fg_scale
     offset = (size - 108 * scale) / 2
 
     if fg_file.endswith((".png", ".webp")):
@@ -442,7 +473,7 @@ def render_adaptive_icon(a, icon_path, dest, size=512):
         except Exception:
             data = a.get_file(fg_file)
         uri = "data:image/png;base64," + base64.b64encode(data).decode()
-        fg_defs, fg_content = "", '<image href="%s" width="%d" height="%d"/>' % (uri, size, size)
+        fg_defs, fg_content = "", '<image href="%s" width="%d" height="%d"/>' % (uri, 108, 108)
     else:
         fg_xml = AXMLPrinter(a.get_file(fg_file)).get_xml().decode("utf-8", errors="replace")
         fg_defs, fg_content = _vector_to_content(a, fg_xml, gid)
