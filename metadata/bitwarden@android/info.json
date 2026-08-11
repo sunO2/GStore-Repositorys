@@ -5,7 +5,7 @@
   "appName": "Bitwarden",
   "versionName": "2026.7.1",
   "versionCode": "21803",
-  "icon": "metadata/bitwarden@android/icon.png",
+  "icon": "metadata/bitwarden@android/icon.png?r=a11b685c",
   "sourceTag": "v2026.7.1-bwpm",
   "sourceApk": "com.x8bit.bitwarden-fdroid.apk",
   "generatedAt": "2026-08-07T22:20:51Z"
