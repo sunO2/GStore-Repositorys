@@ -669,6 +669,17 @@ def main():
 
         icon_path = extract_icon(a, a.get_app_icon(), icon_file)
 
+        # 图标内容指纹：内容变化 → 指纹变化 → URL 变化 → App 端缓存自动失效
+        # （文件名保持 icon.png，query 携带指纹，仓库历史干净）
+        icon_ref = icon_path or ""
+        if icon_path and os.path.exists(icon_path):
+            try:
+                import hashlib
+                with open(icon_path, "rb") as f:
+                    icon_ref = "%s?r=%s" % (icon_path, hashlib.md5(f.read()).hexdigest()[:8])
+            except Exception:
+                pass
+
         data = {
             "owner": owner,
             "repo": repo,
@@ -676,7 +687,7 @@ def main():
             "appName": app_name or "",
             "versionName": version_name or "",
             "versionCode": version_code if version_code is not None else "",
-            "icon": icon_path or "",
+            "icon": icon_ref,
             "sourceTag": tag,
             "sourceApk": asset_name,
             "generatedAt": published_at,
