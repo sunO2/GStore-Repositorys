@@ -173,55 +173,9 @@ def _argb_to_css(v):
     return v
 
 
-_NUM = re.compile(r"[-+]?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?")
-
-
-def _transform_path_data(d, s, tx, ty):
-    """对 pathData 应用 scale(s) + translate(tx,ty)；相对命令只缩放不平移"""
-    out = []
-    i = 0
-    prev_cmd = None
-    while i < len(d):
-        ch = d[i]
-        if ch.isalpha():
-            out.append(ch)
-            prev_cmd = ch
-            i += 1
-            continue
-        if ch in " ,":
-            out.append(ch)
-            i += 1
-            continue
-        m = _NUM.match(d, i)
-        if not m:
-            i += 1
-            continue
-        val = float(m.group(0))
-        cmd = prev_cmd or "M"
-        rel = cmd.islower()
-        if cmd.upper() in "HV":
-            nv = (val * s + (0 if rel else tx)) if cmd.upper() == "H" else (val * s + (0 if rel else ty))
-            out.append("%.2f" % nv if nv == int(nv) else str(nv))
-        else:
-            i2 = m.end()
-            m2 = _NUM.match(d, i2)
-            if m2:
-                val2 = float(m2.group(0))
-                nx = val * s + (0 if rel else tx)
-                ny = val2 * s + (0 if rel else ty)
-                out.append(str(nx))
-                out.append(",")
-                out.append(str(ny))
-                i = m2.end()
-                continue
-            else:
-                out.append(str(val * s))
-        i = m.end()
-    return "".join(out)
-
-
-def _parse_fill(a, rid, gid_counter, s=1.0, tx=0.0, ty=0.0):
-    """解析 fillColor 引用 → (SVG fill 属性, 渐变 def 或 None)"""
+def _parse_fill(a, rid, gid_counter):
+    """解析 fillColor 引用 → (SVG fill 属性, 渐变 def 或 None)
+    渐变坐标不手动变换（userSpaceOnUse 会跟随嵌套 group transform，由渲染器处理）"""
     c = _resolve_color(a, rid)
     if c:
         return 'fill="%s"' % _argb_to_css(c), None
@@ -247,11 +201,11 @@ def _parse_fill(a, rid, gid_counter, s=1.0, tx=0.0, ty=0.0):
                     o = off if off is not None else (idx / (n - 1) if n > 1 else 0)
                     stop_xml += '<stop offset="%.2f" stop-color="%s"/>' % (o, col)
                 if gtype == 0:
-                    x1 = float(aget(root, "startX") or "0"); y1 = float(aget(root, "startY") or "0")
-                    x2 = float(aget(root, "endX") or "100"); y2 = float(aget(root, "endY") or "0")
+                    x1 = aget(root, "startX") or "0"; y1 = aget(root, "startY") or "0"
+                    x2 = aget(root, "endX") or "100"; y2 = aget(root, "endY") or "0"
                     grad = ('<linearGradient id="%s" gradientUnits="userSpaceOnUse" '
-                            'x1="%.2f" y1="%.2f" x2="%.2f" y2="%.2f">%s</linearGradient>'
-                            % (gid, x1 * s + tx, y1 * s + ty, x2 * s + tx, y2 * s + ty, stop_xml))
+                            'x1="%s" y1="%s" x2="%s" y2="%s">%s</linearGradient>'
+                            % (gid, x1, y1, x2, y2, stop_xml))
                 else:
                     grad = '<radialGradient id="%s">%s</radialGradient>' % (gid, stop_xml)
                 return 'fill="url(#%s)"' % gid, grad
@@ -260,34 +214,52 @@ def _parse_fill(a, rid, gid_counter, s=1.0, tx=0.0, ty=0.0):
     return 'fill="#000000"', None
 
 
-def _vector_to_svg(a, xml_text, s, tx, ty):
-    """VectorDrawable XML → (渐变 defs, path 内容)；pathData 已数值变换"""
-    root = ET.fromstring(xml_text)
-    gid = [0]
-    defs = []
+def _group_transform(elem):
+    """Android VGroup 变换顺序：translate(-pivot) → scale → rotate → translate(tx+pivot, ty+pivot)
+    输出 SVG transform 属性（从右到左应用，与 Android post 系列一致）"""
+    tx = float(aget(elem, "translateX") or "0")
+    ty = float(aget(elem, "translateY") or "0")
+    sx = float(aget(elem, "scaleX") or "1")
+    sy = float(aget(elem, "scaleY") or "1")
+    rot = float(aget(elem, "rotate") or "0")
+    px = float(aget(elem, "pivotX") or "0")
+    py = float(aget(elem, "pivotY") or "0")
+    if not (tx or ty or sx != 1 or sy != 1 or rot or px or py):
+        return ""
     parts = []
+    # 注意 SVG transform 列表从右到左应用：最后写最先生效的变换
+    parts.append("translate(%s,%s)" % (tx + px, ty + py))  # 最后应用（Android 最后 post）
+    if rot:
+        parts.append("rotate(%s)" % rot)
+    if sx != 1 or sy != 1:
+        parts.append("scale(%s,%s)" % (sx, sy))
+    parts.append("translate(%s,%s)" % (-px, -py))  # 最先应用
+    return ' transform="' + " ".join(parts) + '"'
 
-    def walk_flat(elem, cs, ctx, cty):
+
+def _vector_to_content(a, xml_text, gid_counter):
+    """VectorDrawable XML → (渐变 defs, 嵌套 group 的 SVG 内容)
+    变换保留为嵌套 group transform，由渲染器（cairosvg）处理，
+    避免数值变换 pathData 的 arc 参数/rotate 出错导致的偏移"""
+    root = ET.fromstring(xml_text)
+    defs = []
+    out = []
+
+    def walk(elem):
         tag = elem.tag.split("}")[-1]
         if tag == "group":
-            gs = float(aget(elem, "scaleX") or "1")
-            gy = float(aget(elem, "scaleY") or "1")
-            gtx = float(aget(elem, "translateX") or "0")
-            gty = float(aget(elem, "translateY") or "0")
-            rot = float(aget(elem, "rotate") or "0")
-            if rot != 0 or gs != gy:
-                return  # 复杂变换（旋转/非等比缩放）：跳过
+            out.append("<g%s>" % _group_transform(elem))
             for ch in elem:
-                walk_flat(ch, cs * gs, ctx + gtx * cs, cty + gty * cs)
+                walk(ch)
+            out.append("</g>")
         elif tag == "path":
             d = aget(elem, "pathData")
             if not d:
                 return
-            nd = _transform_path_data(d, cs, ctx, cty)
-            attrs = ['d="%s"' % nd]
+            attrs = ['d="%s"' % d]
             fc = aget(elem, "fillColor")
             if fc and fc.startswith("@"):
-                fill, grad = _parse_fill(a, int(fc[1:], 16), gid, cs, ctx, cty)
+                fill, grad = _parse_fill(a, int(fc[1:], 16), gid_counter)
                 attrs.append(fill)
                 if grad:
                     defs.append(grad)
@@ -305,11 +277,16 @@ def _vector_to_svg(a, xml_text, s, tx, ty):
             ft = aget(elem, "fillType")
             if ft in ("evenOdd", "1"):
                 attrs.append('fill-rule="evenodd"')
-            parts.append("<path " + " ".join(attrs) + "/>")
+            out.append("<path " + " ".join(attrs) + "/>")
+        elif tag == "clip-path":
+            out.append("<clipPath>")
+            for ch in elem:
+                walk(ch)
+            out.append("</clipPath>")
 
     for ch in root:
-        walk_flat(ch, s, tx, ty)
-    return "".join(defs), "".join(parts)
+        walk(ch)
+    return "".join(defs), "".join(out)
 
 
 def render_adaptive_icon(a, icon_path, dest, size=512):
@@ -345,13 +322,16 @@ def render_adaptive_icon(a, icon_path, dest, size=512):
         fg_defs, fg_content = "", '<image href="%s" width="%d" height="%d"/>' % (uri, size, size)
     else:
         fg_xml = AXMLPrinter(a.get_file(fg_file)).get_xml().decode("utf-8", errors="replace")
-        fg_defs, fg_content = _vector_to_svg(a, fg_xml, scale, offset, offset)
+        fg_defs, fg_content = _vector_to_content(a, fg_xml, [0])
 
     bg_rect = '<rect width="%d" height="%d" fill="%s"/>' % (size, size, bg_color or "#FFFFFF")
+    # 前景内容（108 viewport）整体缩放到安全区居中；内部 group 变换由渲染器处理
     combined = (
         '<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d">'
-        "%s<defs>%s</defs>%s</svg>"
-    ) % (size, size, bg_rect, fg_defs, fg_content)
+        "%s<defs>%s</defs>"
+        '<g transform="translate(%s,%s) scale(%s)">%s</g>'
+        "</svg>"
+    ) % (size, size, bg_rect, fg_defs, offset, offset, scale, fg_content)
 
     import cairosvg
     cairosvg.svg2png(bytestring=combined.encode(), write_to=dest, output_width=size, output_height=size)
