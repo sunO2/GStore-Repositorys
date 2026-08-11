@@ -82,10 +82,13 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+          # pip 缓存：依赖不变时安装步骤秒级完成（缓存按 requirements.txt 哈希作 key）
+          cache: 'pip'
+          cache-dependency-path: requirements.txt
 
       - name: Install androguard
         if: steps.parse.outputs.invalid != 'yes'
-        run: pip install androguard cairosvg pillow
+        run: pip install -r requirements.txt
 
       - name: 下载 APK 并提取元数据
         id: extract
