@@ -5,7 +5,7 @@
   "appName": "RustDesk",
   "versionName": "1.4.9",
   "versionCode": "2067",
-  "icon": "",
+  "icon": "metadata/rustdesk@rustdesk/icon.png",
   "sourceTag": "nightly",
   "sourceApk": "rustdesk-1.4.9-aarch64-signed.apk",
   "generatedAt": "2026-07-10T05:02:29Z"
