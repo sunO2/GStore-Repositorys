@@ -1,0 +1,12 @@
+{
+  "owner": "anilbeesetti",
+  "repo": "nextplayer",
+  "packageName": "dev.anilbeesetti.nextplayer",
+  "appName": "Next Player",
+  "versionName": "0.17.5",
+  "versionCode": "72",
+  "icon": "metadata/anilbeesetti@nextplayer/icon.png?r=55429dae",
+  "sourceTag": "v0.17.5",
+  "sourceApk": "nextplayer-v0.17.5-arm64-v8a.apk",
+  "generatedAt": "2026-08-09T04:16:51Z"
+}
