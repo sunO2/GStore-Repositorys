@@ -5,7 +5,7 @@
   "appName": "ProxyPin",
   "versionName": "1.3.1",
   "versionCode": "36",
-  "icon": "",
+  "icon": "metadata/wanghongenpin@proxypin/icon.png",
   "sourceTag": "v1.3.1",
   "sourceApk": "proxypin-android-arm64.apk",
   "generatedAt": "2026-07-29T20:30:50Z"
