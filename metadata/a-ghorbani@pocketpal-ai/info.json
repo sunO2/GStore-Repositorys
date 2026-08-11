@@ -1,0 +1,12 @@
+{
+  "owner": "a-ghorbani",
+  "repo": "pocketpal-ai",
+  "packageName": "com.pocketpalai",
+  "appName": "PocketPal",
+  "versionName": "1.16.1",
+  "versionCode": "143",
+  "icon": "metadata/a-ghorbani@pocketpal-ai/icon.png",
+  "sourceTag": "v1.16.1",
+  "sourceApk": "app-prod-release.apk",
+  "generatedAt": "2026-07-07T11:46:11Z"
+}
