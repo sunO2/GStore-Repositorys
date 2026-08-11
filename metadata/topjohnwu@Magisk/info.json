@@ -1,0 +1,12 @@
+{
+  "owner": "topjohnwu",
+  "repo": "Magisk",
+  "packageName": "com.topjohnwu.magisk",
+  "appName": "Magisk",
+  "versionName": "30.7",
+  "versionCode": "30700",
+  "icon": "",
+  "sourceTag": "v30.7",
+  "sourceApk": "app-debug.apk",
+  "generatedAt": "2026-02-23T08:07:01Z"
+}
