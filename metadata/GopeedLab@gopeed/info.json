@@ -1,0 +1,12 @@
+{
+  "owner": "GopeedLab",
+  "repo": "gopeed",
+  "packageName": "com.gopeed.gopeed",
+  "appName": "Gopeed",
+  "versionName": "1.9.3",
+  "versionCode": "2001",
+  "icon": "metadata/GopeedLab@gopeed/icon.png?r=1bd422ad",
+  "sourceTag": "v1.9.3",
+  "sourceApk": "Gopeed-v1.9.3-android-arm64-v8a.apk",
+  "generatedAt": "2026-03-18T12:54:20Z"
+}
