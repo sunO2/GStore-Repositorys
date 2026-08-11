@@ -149,6 +149,22 @@ def _resolve_res_file(a, rid):
     return None
 
 
+def _resolve_res_files(a, rid):
+    """返回资源引用的全部文件变体（同一资源 ID 的多个 density 条目）"""
+    try:
+        from androguard.core.axml import ARSCResTableEntry
+        res = a.get_android_resources()
+        files = []
+        for e in res.packages[list(res.packages.keys())[0]]:
+            if isinstance(e, ARSCResTableEntry) and e.mResId == rid:
+                key = e.get_key_data()
+                if key and key not in files:
+                    files.append(key)
+        return files
+    except Exception:
+        return []
+
+
 def _argb_to_css(v):
     """Android #AARRGGBB → CSS rgba()（cairosvg 不支持 #RRGGBBAA）"""
     if re.match(r"^#[0-9A-Fa-f]{8}$", v):
@@ -354,6 +370,20 @@ def extract_icon(a, icon_path, dest):
         primary = a.get_app_icon()
         if primary:
             candidates.append(primary)
+            # BitmapDrawable 图标（<bitmap android:src="@...">，如 Shizuku）：
+            # 解析引用指向的实际图像文件（含全部 density 变体）
+            if primary.endswith(".xml"):
+                try:
+                    from androguard.core.axml import AXMLPrinter
+                    xml = AXMLPrinter(a.get_file(primary)).get_xml().decode("utf-8", errors="replace")
+                    m = re.search(r'android:src="(@[0-9A-Fa-f]+)"', xml)
+                    if m and "<adaptive-icon" not in xml:
+                        rid = int(m.group(1)[1:], 16)
+                        variants = _resolve_res_files(a, rid)
+                        candidates.extend(variants)
+                        log(f"BitmapDrawable 图标引用: {primary} -> {variants}")
+                except Exception:
+                    pass
     except Exception:
         pass
     for path in a.get_files():
