@@ -1,0 +1,12 @@
+{
+  "owner": "gkd-kit",
+  "repo": "gkd",
+  "packageName": "li.songe.gkd",
+  "appName": "GKD",
+  "versionName": "1.12.1",
+  "versionCode": "92",
+  "icon": "metadata/gkd-kit@gkd/icon.png?r=e73e544d",
+  "sourceTag": "v1.12.1",
+  "sourceApk": "gkd-v1.12.1.apk",
+  "generatedAt": "2026-05-20T09:43:34Z"
+}
