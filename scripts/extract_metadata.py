@@ -591,19 +591,18 @@ def extract_icon(a, icon_path, dest):
     return dest
 
 
-def main():
-    if len(sys.argv) < 3:
-        print(__doc__)
-        return 2
-    owner, repo = sys.argv[1], sys.argv[2]
-    keyword = sys.argv[3] if len(sys.argv) > 3 else ""
+def process_app(owner, repo, keyword="", local_apk=None):
+    """下载 APK（或使用本地文件）→ 提取元数据/图标 → 写入 metadata/{owner}@{repo}/info.json
 
+    返回 (成功 bool, 元数据 dict 或 None, 错误信息或 None)
+    供 CLI（main）与每日批量检测（daily_check.py）复用
+    """
     try:
         import androguard  # noqa: F401
         from androguard.core.apk import APK
     except ImportError:
         print("androguard 未安装，请先执行: pip install androguard")
-        return 2
+        return False, None, "androguard 未安装"
     # 关闭 androguard 的 DEBUG 日志噪音
     logging.getLogger("androguard").setLevel(logging.ERROR)
 
@@ -619,7 +618,6 @@ def main():
 
     apk_path = None
     try:
-        local_apk = os.environ.get("GSTORE_LOCAL_APK")
         if local_apk:
             # 本地调试钩子：跳过 GitHub API 与下载，直接解析本地 APK
             log(f"使用本地 APK: {local_apk}")
@@ -695,23 +693,37 @@ def main():
         with open(meta_file, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
         log(f"元数据已写入: {meta_file}")
-        print(f"RESULT=ok", flush=True)
-        return 0
+        return True, data, None
     except RuntimeError as e:
         log(f"失败: {e}")
         with open(fail_file, "w", encoding="utf-8") as f:
             f.write(str(e))
-        print(f"RESULT=fail:{e}", flush=True)
-        return 0  # 已知失败场景：正常返回，由 workflow 评论后关闭
+        return False, None, str(e)
     except Exception as e:  # noqa: BLE001
         log(f"异常: {e}")
         with open(fail_file, "w", encoding="utf-8") as f:
             f.write(f"内部异常: {e}")
-        return 3
+        return False, None, f"内部异常: {e}"
     finally:
         # 本地调试模式不删除用户提供的 APK；仅清理下载的临时 APK
-        if apk_path and os.path.exists(apk_path) and not os.environ.get("GSTORE_LOCAL_APK"):
+        if apk_path and os.path.exists(apk_path) and not local_apk:
             os.remove(apk_path)
+
+
+def main():
+    if len(sys.argv) < 3:
+        print(__doc__)
+        return 2
+    owner, repo = sys.argv[1], sys.argv[2]
+    keyword = sys.argv[3] if len(sys.argv) > 3 else ""
+    local_apk = os.environ.get("GSTORE_LOCAL_APK")
+
+    ok, data, err = process_app(owner, repo, keyword, local_apk)
+    if ok:
+        print(f"RESULT=ok", flush=True)
+        return 0
+    print(f"RESULT=fail:{err}", flush=True)
+    return 0  # 已知失败场景：正常返回，由 workflow 评论后关闭
 
 
 if __name__ == "__main__":

@@ -1,0 +1,55 @@
+name: Daily App Check
+
+on:
+  schedule:
+    # 每天 22:00 UTC（北京时间次日 06:00）
+    - cron: '0 22 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: requirements.txt
+
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      - name: 每日检测已收录应用
+        id: check
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set +e
+          python scripts/daily_check.py > /tmp/check.log 2>&1
+          CODE=$?
+          cat /tmp/check.log >> "$GITHUB_STEP_SUMMARY"
+          echo "exit_code=$CODE" >> "$GITHUB_OUTPUT"
+          # 限流/达预算提前停止视为正常（剩余下次继续），不阻断提交
+          exit 0
+
+      - name: 提交变更
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add metadata/
+          git commit -m "daily check: 更新应用元数据" || echo "无变更，跳过提交"
+          for i in 1 2 3; do
+            if git push origin main 2>/dev/null; then
+              exit 0
+            fi
+            git pull --rebase origin main
+          done
