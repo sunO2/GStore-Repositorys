@@ -5,7 +5,7 @@
   "appName": "Image Toolbox",
   "versionName": "4.2.0-rc08",
   "versionCode": "264",
-  "icon": "",
+  "icon": "metadata/T8RIN@ImageToolbox/icon.png?r=a0ef39a4",
   "sourceTag": "4.2.0-rc08",
   "sourceApk": "image-toolbox-4.2.0-rc08-arm64-v8a.apk",
   "generatedAt": "2026-08-07T11:14:57Z"
