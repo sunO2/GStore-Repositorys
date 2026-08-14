@@ -1,0 +1,12 @@
+{
+  "owner": "lonnnnnng",
+  "repo": "fluxdown",
+  "packageName": "dev.fluxdown.mobile",
+  "appName": "FluxDown",
+  "versionName": "1.0.9",
+  "versionCode": "10",
+  "icon": "metadata/lonnnnnng@fluxdown/icon.png?r=57838d52",
+  "sourceTag": "v1.0.9",
+  "sourceApk": "FluxDown-1.0.9-android-debug.apk",
+  "generatedAt": "2026-08-05T16:58:27Z"
+}
