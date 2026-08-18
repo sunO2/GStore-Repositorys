@@ -3,10 +3,10 @@
   "repo": "ImageToolbox",
   "packageName": "ru.tech.imageresizershrinker",
   "appName": "Image Toolbox",
-  "versionName": "4.2.0-rc09",
-  "versionCode": "265",
+  "versionName": "4.2.0-rc10",
+  "versionCode": "266",
   "icon": "metadata/T8RIN@ImageToolbox/icon.png?r=a0ef39a4",
-  "sourceTag": "4.2.0-rc09",
-  "sourceApk": "image-toolbox-4.2.0-rc09-arm64-v8a.apk",
-  "generatedAt": "2026-08-11T19:26:47Z"
+  "sourceTag": "4.2.0-rc10",
+  "sourceApk": "image-toolbox-4.2.0-rc10-arm64-v8a.apk",
+  "generatedAt": "2026-08-18T08:55:33Z"
 }
