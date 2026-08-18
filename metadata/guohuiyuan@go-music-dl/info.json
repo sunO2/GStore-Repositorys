@@ -1,0 +1,12 @@
+{
+  "owner": "guohuiyuan",
+  "repo": "go-music-dl",
+  "packageName": "com.musicdl.app.util",
+  "appName": "MusicDL",
+  "versionName": "1.0.0.356",
+  "versionCode": "356",
+  "icon": "metadata/guohuiyuan@go-music-dl/icon.png?r=3f69268f",
+  "sourceTag": "v1.0.33",
+  "sourceApk": "music-dl.apk",
+  "generatedAt": "2026-07-31T01:02:38Z"
+}
