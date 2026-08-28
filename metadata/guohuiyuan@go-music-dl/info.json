@@ -3,10 +3,10 @@
   "repo": "go-music-dl",
   "packageName": "com.musicdl.app.util",
   "appName": "MusicDL",
-  "versionName": "1.0.0.368",
-  "versionCode": "368",
+  "versionName": "1.0.0.374",
+  "versionCode": "374",
   "icon": "metadata/guohuiyuan@go-music-dl/icon.png?r=3f69268f",
-  "sourceTag": "v1.0.34",
+  "sourceTag": "v1.1.0",
   "sourceApk": "music-dl.apk",
-  "generatedAt": "2026-08-24T16:36:16Z"
+  "generatedAt": "2026-08-27T17:14:38Z"
 }
