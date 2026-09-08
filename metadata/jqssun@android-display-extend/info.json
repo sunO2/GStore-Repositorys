@@ -1,0 +1,12 @@
+{
+  "owner": "jqssun",
+  "repo": "android-display-extend",
+  "packageName": "io.github.jqssun.displayextend",
+  "appName": "Extend",
+  "versionName": "0.0.26",
+  "versionCode": "26",
+  "icon": "metadata/jqssun@android-display-extend/icon.png?r=cd37ef72",
+  "sourceTag": "v0.0.26",
+  "sourceApk": "app-release.apk",
+  "generatedAt": "2026-07-22T12:22:02Z"
+}
