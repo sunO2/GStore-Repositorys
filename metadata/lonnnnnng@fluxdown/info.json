@@ -3,10 +3,10 @@
   "repo": "fluxdown",
   "packageName": "dev.fluxdown.mobile",
   "appName": "FluxDown",
-  "versionName": "1.0.17",
-  "versionCode": "18",
+  "versionName": "1.0.18",
+  "versionCode": "19",
   "icon": "metadata/lonnnnnng@fluxdown/icon.png?r=9440c3ea",
-  "sourceTag": "v1.0.17",
-  "sourceApk": "FluxDown-1.0.17-android-release.apk",
-  "generatedAt": "2026-09-08T12:21:47Z"
+  "sourceTag": "v1.0.18",
+  "sourceApk": "FluxDown-1.0.18-android-release.apk",
+  "generatedAt": "2026-09-10T07:57:28Z"
 }
