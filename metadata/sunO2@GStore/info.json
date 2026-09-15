@@ -3,10 +3,10 @@
   "repo": "GStore",
   "packageName": "com.suno2.gstore",
   "appName": "GStore",
-  "versionName": "1.0.29",
+  "versionName": "1.0.31",
   "versionCode": "2001",
   "icon": "metadata/sunO2@GStore/icon.png?r=ab684187",
-  "sourceTag": "v1.0.29",
+  "sourceTag": "v1.0.31",
   "sourceApk": "app-arm64-v8a-release.apk",
-  "generatedAt": "2026-09-10T15:10:54Z"
+  "generatedAt": "2026-09-14T09:19:54Z"
 }
