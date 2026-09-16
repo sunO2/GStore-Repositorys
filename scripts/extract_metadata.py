@@ -603,8 +603,16 @@ def process_app(owner, repo, keyword="", local_apk=None):
     except ImportError:
         print("androguard 未安装，请先执行: pip install androguard")
         return False, None, "androguard 未安装"
-    # 关闭 androguard 的 DEBUG 日志噪音
+    # 关闭 androguard 的 DEBUG 日志噪音。
+    # 注意：androguard 4.x 的日志走 loguru，不受 stdlib logging 控制
+    # （只设 logging 会退化成一个 APK 刷出 10 万行 DEBUG，撑爆 CI 步骤摘要），两个都关。
     logging.getLogger("androguard").setLevel(logging.ERROR)
+    try:
+        from loguru import logger as _loguru_logger
+
+        _loguru_logger.disable("androguard")
+    except ImportError:
+        pass
 
     project_dir = f"metadata/{owner}@{repo}"
     os.makedirs(project_dir, exist_ok=True)

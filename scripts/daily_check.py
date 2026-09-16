@@ -31,7 +31,11 @@ from extract_metadata import log, process_app
 API = "https://api.github.com"
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
 ETAGS_FILE = "metadata/_etags.json"
-DEFAULT_RATE_BUDGET = 3500  # 每次运行 200 响应预算（5000/小时限流留余量）
+# CI 里用的是 built-in GITHUB_TOKEN：1000 请求/小时/仓库（不是 PAT 的 5000）。
+# 每个「有更新」的应用实际消耗 3 个计入请求：本次 200 + process_app 的 repo info + releases。
+# 304 不计入限额，所以预算只约束「有更新的应用数」：300 × 3 = 900 < 1000，留出余量。
+# 若将来换成 PAT（5000/小时），可改回 ~1500。
+DEFAULT_RATE_BUDGET = 300
 SLEEP_BETWEEN = 0.12  # 温和请求节奏（~8 请求/秒）
 
 

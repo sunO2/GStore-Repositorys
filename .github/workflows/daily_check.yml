@@ -34,7 +34,9 @@ jobs:
           set +e
           python scripts/daily_check.py > /tmp/check.log 2>&1
           CODE=$?
-          cat /tmp/check.log >> "$GITHUB_STEP_SUMMARY"
+          # GitHub 步骤摘要硬上限 1MiB（20MiB/job），超了整份摘要会被 abort 丢弃。
+          # 全量日志本来就在步骤控制台里，这里只截取尾部，防止某个 APK 解析刷屏时再次撑爆。
+          tail -c 262144 /tmp/check.log >> "$GITHUB_STEP_SUMMARY"
           echo "exit_code=$CODE" >> "$GITHUB_OUTPUT"
           # 限流/达预算提前停止视为正常（剩余下次继续），不阻断提交
           exit 0
