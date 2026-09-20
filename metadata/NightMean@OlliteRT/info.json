@@ -1,0 +1,12 @@
+{
+  "owner": "NightMean",
+  "repo": "OlliteRT",
+  "packageName": "com.ollitert.llm.server.beta",
+  "appName": "OlliteRT Beta",
+  "versionName": "0.9.6-beta.1",
+  "versionCode": "30",
+  "icon": "metadata/NightMean@OlliteRT/icon.png?r=baeceb3b",
+  "sourceTag": "v0.9.6-beta.1",
+  "sourceApk": "OlliteRT-v0.9.6-beta.1-arm64-v8a.apk",
+  "generatedAt": "2026-06-06T13:00:39Z"
+}
