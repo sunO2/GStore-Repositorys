@@ -6,7 +6,7 @@
   "versionName": "1.5.0",
   "versionCode": "2068",
   "icon": "metadata/rustdesk@rustdesk/icon.png?r=be61a945",
-  "sourceTag": "nightly",
+  "sourceTag": "1.5.0",
   "sourceApk": "rustdesk-1.5.0-aarch64-signed.apk",
-  "generatedAt": "2026-07-10T05:02:29Z"
+  "generatedAt": "2026-09-25T08:35:47Z"
 }
