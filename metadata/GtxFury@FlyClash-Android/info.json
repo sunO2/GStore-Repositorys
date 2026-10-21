@@ -1,12 +1,12 @@
 {
   "owner": "GtxFury",
   "repo": "FlyClash-Android",
-  "packageName": "com.gtxfury.flyclash.smart",
-  "appName": "FlyClash",
-  "versionName": "0.2.1.9.Smart",
-  "versionCode": "2019",
-  "icon": "metadata/GtxFury@FlyClash-Android/icon.png?r=31ac1667",
-  "sourceTag": "v0.2.1.9-Alpha-Smart",
-  "sourceApk": "diodos-0.2.1.9-pbSmart-arm64-v8a-release.apk",
-  "generatedAt": "2026-09-07T12:57:35Z"
+  "packageName": "com.devi766.diodos.smart",
+  "appName": "Diodos",
+  "versionName": "0.2.2.0.Smart",
+  "versionCode": "2020",
+  "icon": "metadata/GtxFury@FlyClash-Android/icon.png?r=6477d172",
+  "sourceTag": "v0.2.2.0-Alpha-Smart",
+  "sourceApk": "diodos-0.2.2.0-pbSmart-arm64-v8a-release.apk",
+  "generatedAt": "2026-10-20T02:02:38Z"
 }
