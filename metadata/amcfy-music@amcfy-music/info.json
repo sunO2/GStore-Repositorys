@@ -1,0 +1,12 @@
+{
+  "owner": "amcfy-music",
+  "repo": "amcfy-music",
+  "packageName": "com.sumsg.musichub",
+  "appName": "Amcfy Music",
+  "versionName": "1.2.15",
+  "versionCode": "10044",
+  "icon": "metadata/amcfy-music@amcfy-music/icon.png?r=211d7da2",
+  "sourceTag": "1.2.15",
+  "sourceApk": "Amcfy.Music-Android-v7a_1.2.15+10044.apk",
+  "generatedAt": "2026-09-24T15:31:43Z"
+}
