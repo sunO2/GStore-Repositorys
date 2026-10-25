@@ -3,10 +3,10 @@
   "repo": "Magisk",
   "packageName": "com.topjohnwu.magisk",
   "appName": "Magisk",
-  "versionName": "31.0",
-  "versionCode": "31000",
+  "versionName": "31.1",
+  "versionCode": "31100",
   "icon": "",
-  "sourceTag": "v31.0",
+  "sourceTag": "v31.1",
   "sourceApk": "app-debug.apk",
-  "generatedAt": "2026-09-04T16:56:10Z"
+  "generatedAt": "2026-10-25T02:03:45Z"
 }
