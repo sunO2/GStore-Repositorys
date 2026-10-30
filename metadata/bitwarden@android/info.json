@@ -3,10 +3,10 @@
   "repo": "android",
   "packageName": "com.x8bit.bitwarden",
   "appName": "Bitwarden",
-  "versionName": "2026.10.0",
-  "versionCode": "21955",
+  "versionName": "2026.10.1",
+  "versionCode": "21986",
   "icon": "metadata/bitwarden@android/icon.png?r=a11b685c",
-  "sourceTag": "v2026.10.0-bwpm",
+  "sourceTag": "v2026.10.1-bwpm",
   "sourceApk": "com.x8bit.bitwarden-fdroid.apk",
-  "generatedAt": "2026-10-15T21:56:46Z"
+  "generatedAt": "2026-10-29T18:34:26Z"
 }
