@@ -3,10 +3,10 @@
   "repo": "pocketpal-ai",
   "packageName": "com.pocketpalai",
   "appName": "PocketPal",
-  "versionName": "1.21.4",
-  "versionCode": "157",
-  "icon": "metadata/a-ghorbani@pocketpal-ai/icon.png?r=955c5c62",
-  "sourceTag": "v1.21.4",
+  "versionName": "1.22.0",
+  "versionCode": "158",
+  "icon": "metadata/a-ghorbani@pocketpal-ai/icon.png?r=6bccff15",
+  "sourceTag": "v1.22.0",
   "sourceApk": "app-prod-release.apk",
-  "generatedAt": "2026-10-28T15:18:05Z"
+  "generatedAt": "2026-10-30T22:13:25Z"
 }
