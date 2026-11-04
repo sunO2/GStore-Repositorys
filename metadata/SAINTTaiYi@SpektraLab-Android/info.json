@@ -1,0 +1,12 @@
+{
+  "owner": "SAINTTaiYi",
+  "repo": "SpektraLab-Android",
+  "packageName": "app.spektralab",
+  "appName": "SpektraLab",
+  "versionName": "1.4.4",
+  "versionCode": "155",
+  "icon": "metadata/SAINTTaiYi@SpektraLab-Android/icon.png?r=5514a7cd",
+  "sourceTag": "v1.4.4",
+  "sourceApk": "SpektraLab-1.4.4-arm64-v8a.apk",
+  "generatedAt": "2026-11-03T23:57:23Z"
+}
