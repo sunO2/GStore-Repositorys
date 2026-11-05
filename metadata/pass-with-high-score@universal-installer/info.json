@@ -1,0 +1,12 @@
+{
+  "owner": "pass-with-high-score",
+  "repo": "universal-installer",
+  "packageName": "app.pwhs.universalinstaller",
+  "appName": "Universal Installer",
+  "versionName": "1.21.0",
+  "versionCode": "45",
+  "icon": "metadata/pass-with-high-score@universal-installer/icon.png?r=53897926",
+  "sourceTag": "v1.21.0",
+  "sourceApk": "app-release.apk",
+  "generatedAt": "2026-11-01T09:24:40Z"
+}
