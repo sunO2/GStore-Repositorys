@@ -3,10 +3,10 @@
   "repo": "proxypin",
   "packageName": "com.network.proxy",
   "appName": "ProxyPin",
-  "versionName": "1.3.3",
-  "versionCode": "39",
+  "versionName": "1.4.0",
+  "versionCode": "40",
   "icon": "metadata/wanghongenpin@proxypin/icon.png?r=66e39004",
-  "sourceTag": "v1.3.3",
-  "sourceApk": "proxypin-android-1.3.3.apk",
-  "generatedAt": "2026-09-29T06:23:52Z"
+  "sourceTag": "v1.4.0",
+  "sourceApk": "proxypin-android-1.4.0.apk",
+  "generatedAt": "2026-10-23T01:29:08Z"
 }
