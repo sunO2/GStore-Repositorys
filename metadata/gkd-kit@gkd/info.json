@@ -3,10 +3,10 @@
   "repo": "gkd",
   "packageName": "li.songe.gkd",
   "appName": "GKD",
-  "versionName": "1.12.1",
-  "versionCode": "92",
+  "versionName": "1.13.0",
+  "versionCode": "100",
   "icon": "metadata/gkd-kit@gkd/icon.png?r=e73e544d",
-  "sourceTag": "v1.12.1",
-  "sourceApk": "gkd-v1.12.1.apk",
-  "generatedAt": "2026-05-20T09:43:34Z"
+  "sourceTag": "v1.13.0",
+  "sourceApk": "gkd-v1.13.0.apk",
+  "generatedAt": "2026-11-06T06:37:25Z"
 }
