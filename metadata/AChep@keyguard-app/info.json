@@ -3,10 +3,10 @@
   "repo": "keyguard-app",
   "packageName": "com.artemchep.keyguard",
   "appName": "Keyguard",
-  "versionName": "3.7.0",
-  "versionCode": "130240174",
+  "versionName": "3.8.0",
+  "versionCode": "130240178",
   "icon": "metadata/AChep@keyguard-app/icon.png?r=955b8f21",
-  "sourceTag": "r20261103",
+  "sourceTag": "r20261109",
   "sourceApk": "androidApp-none-release.apk",
-  "generatedAt": "2026-11-03T16:55:41Z"
+  "generatedAt": "2026-11-09T17:54:12Z"
 }
