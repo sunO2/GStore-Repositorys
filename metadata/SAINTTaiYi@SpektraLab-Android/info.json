@@ -3,10 +3,10 @@
   "repo": "SpektraLab-Android",
   "packageName": "app.spektralab",
   "appName": "SpektraLab",
-  "versionName": "1.6.0t",
-  "versionCode": "341",
+  "versionName": "1.6.2m",
+  "versionCode": "385",
   "icon": "metadata/SAINTTaiYi@SpektraLab-Android/icon.png?r=5514a7cd",
-  "sourceTag": "v1.6.0t",
-  "sourceApk": "SpektraLab-1.6.0t-arm64-v8a.apk",
-  "generatedAt": "2026-11-09T20:33:05Z"
+  "sourceTag": "v1.6.2m",
+  "sourceApk": "SpektraLab-1.6.2m-arm64-v8a.apk",
+  "generatedAt": "2026-11-10T20:00:59Z"
 }

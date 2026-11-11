@@ -3,10 +3,10 @@
   "repo": "FluxDown",
   "packageName": "com.fluxdown.app",
   "appName": "FluxDown",
-  "versionName": "0.6.6",
-  "versionCode": "60600",
+  "versionName": "0.6.7",
+  "versionCode": "60700",
   "icon": "metadata/zerx-lab@FluxDown/icon.png?r=d8010be9",
-  "sourceTag": "v0.6.6",
-  "sourceApk": "FluxDown-0.6.6-android-arm64-v8a.apk",
-  "generatedAt": "2026-11-02T05:12:20Z"
+  "sourceTag": "v0.6.7",
+  "sourceApk": "FluxDown-0.6.7-android-arm64-v8a.apk",
+  "generatedAt": "2026-11-10T12:47:30Z"
 }
