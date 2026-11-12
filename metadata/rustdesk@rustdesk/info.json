@@ -3,10 +3,10 @@
   "repo": "rustdesk",
   "packageName": "com.carriez.flutter_hbb",
   "appName": "RustDesk",
-  "versionName": "1.5.1",
-  "versionCode": "2069",
+  "versionName": "1.5.3",
+  "versionCode": "2071",
   "icon": "metadata/rustdesk@rustdesk/icon.png?r=be61a945",
-  "sourceTag": "1.5.1",
-  "sourceApk": "rustdesk-1.5.1-aarch64-signed.apk",
-  "generatedAt": "2026-11-01T16:13:27Z"
+  "sourceTag": "1.5.3",
+  "sourceApk": "rustdesk-1.5.3-aarch64-signed.apk",
+  "generatedAt": "2026-11-09T09:43:52Z"
 }

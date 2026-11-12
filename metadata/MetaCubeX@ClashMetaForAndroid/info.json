@@ -3,10 +3,10 @@
   "repo": "ClashMetaForAndroid",
   "packageName": "com.github.metacubex.clash.meta",
   "appName": "Clash Meta for Android",
-  "versionName": "2.11.36.Meta",
-  "versionCode": "211036",
+  "versionName": "2.11.37.Meta",
+  "versionCode": "211037",
   "icon": "metadata/MetaCubeX@ClashMetaForAndroid/icon.png?r=bbdfd326",
-  "sourceTag": "v2.11.36",
-  "sourceApk": "cmfa-2.11.36-meta-arm64-v8a-release.apk",
-  "generatedAt": "2026-10-21T16:44:10Z"
+  "sourceTag": "v2.11.37",
+  "sourceApk": "cmfa-2.11.37-meta-arm64-v8a-release.apk",
+  "generatedAt": "2026-11-11T06:52:15Z"
 }

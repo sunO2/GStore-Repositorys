@@ -3,10 +3,10 @@
   "repo": "Shizuku-Next",
   "packageName": "moe.shizuku.privileged.api",
   "appName": "Shizuku-Next",
-  "versionName": "14.0.33-next",
-  "versionCode": "2011",
+  "versionName": "14.0.34-next",
+  "versionCode": "2049",
   "icon": "metadata/rushiranpise@Shizuku-Next/icon.png?r=4a04111d",
-  "sourceTag": "v14.0.33-next",
-  "sourceApk": "shizuku-v14.0.33-next-debug.apk",
-  "generatedAt": "2026-11-05T07:20:57Z"
+  "sourceTag": "v14.0.34-next",
+  "sourceApk": "shizuku-v14.0.34-next-debug.apk",
+  "generatedAt": "2026-11-11T04:08:36Z"
 }
