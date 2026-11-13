@@ -3,10 +3,10 @@
   "repo": "FlyClash-Android",
   "packageName": "com.devi766.diodos.smart",
   "appName": "Diodos",
-  "versionName": "0.2.2.0.Smart",
-  "versionCode": "2020",
+  "versionName": "0.2.2.1.Smart",
+  "versionCode": "2021",
   "icon": "metadata/GtxFury@FlyClash-Android/icon.png?r=6477d172",
-  "sourceTag": "v0.2.2.0-Alpha-Smart",
-  "sourceApk": "diodos-0.2.2.0-pbSmart-arm64-v8a-release.apk",
-  "generatedAt": "2026-10-20T02:02:38Z"
+  "sourceTag": "v0.2.2.1-Alpha-Smart",
+  "sourceApk": "diodos-0.2.2.1-pbSmart-arm64-v8a-release.apk",
+  "generatedAt": "2026-11-12T08:17:17Z"
 }
