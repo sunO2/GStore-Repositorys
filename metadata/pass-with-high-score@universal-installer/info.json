@@ -3,10 +3,10 @@
   "repo": "universal-installer",
   "packageName": "app.pwhs.universalinstaller",
   "appName": "Universal Installer",
-  "versionName": "2.0.1",
-  "versionCode": "49",
+  "versionName": "2.0.2",
+  "versionCode": "50",
   "icon": "metadata/pass-with-high-score@universal-installer/icon.png?r=53897926",
-  "sourceTag": "v2.0.1",
+  "sourceTag": "v2.0.2",
   "sourceApk": "app-release.apk",
-  "generatedAt": "2026-11-22T15:18:29Z"
+  "generatedAt": "2026-11-24T15:18:17Z"
 }

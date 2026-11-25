@@ -3,10 +3,10 @@
   "repo": "localsend",
   "packageName": "org.localsend.localsend_app",
   "appName": "LocalSend",
-  "versionName": "1.18.2",
-  "versionCode": "642",
+  "versionName": "1.19.0",
+  "versionCode": "652",
   "icon": "metadata/localsend@localsend/icon.png?r=c9df1d3e",
-  "sourceTag": "v1.18.2",
-  "sourceApk": "LocalSend-1.18.2-android-arm32v7.apk",
-  "generatedAt": "2026-08-21T14:02:01Z"
+  "sourceTag": "v1.19.0",
+  "sourceApk": "LocalSend-1.19.0-android-arm32v7.apk",
+  "generatedAt": "2026-11-24T15:18:46Z"
 }
